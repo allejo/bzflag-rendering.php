@@ -1,0 +1,46 @@
+{
+    "name": "allejo/bzflag-rendering.php",
+    "description": "A library for rendering thumbnails of BZFlag worlds",
+    "type": "library",
+    "require": {
+        "php": ">=7.1",
+        "allejo/bzflag-networking.php": "^1.1-dev",
+        "meyfa/php-svg": "^0.9.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.25"
+    },
+    "autoload": {
+        "psr-4": {
+            "allejo\\bzflag\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "allejo\\bzflag\\test\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir \"allejo\" Jimenez",
+            "email": "me@allejo.io"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "scripts": {
+        "prettify": "php-cs-fixer fix",
+        "test": "phpunit",
+        "typing": "phpstan analyse src --level 8"
+    }
+}
