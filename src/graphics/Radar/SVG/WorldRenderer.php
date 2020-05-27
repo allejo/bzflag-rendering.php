@@ -43,6 +43,7 @@ class WorldRenderer
 
         $this->svg = new SVG($this->worldBoundary['x'], $this->worldBoundary['y']);
         $this->document = $this->svg->getDocument();
+        $this->document->setStyle('border', '1px solid rgb(0, 204, 255)');
 
         $this->renderObstacleSVGs();
     }
