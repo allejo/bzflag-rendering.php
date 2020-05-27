@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ea43f413e722a9c2bc161be162c49c0",
+    "content-hash": "ad3d62e20f83e7f140d6a4763dee82f2",
     "packages": [
         {
             "name": "allejo/bzflag-networking.php",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/allejo/bzflag-networking.php.git",
-                "reference": "1628add76fa8dcf8eb5f35689f1e36192869ac6e"
+                "reference": "6dac78a37a66f07951a471c557de4dbac2d2cfc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/1628add76fa8dcf8eb5f35689f1e36192869ac6e",
-                "reference": "1628add76fa8dcf8eb5f35689f1e36192869ac6e",
+                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/6dac78a37a66f07951a471c557de4dbac2d2cfc7",
+                "reference": "6dac78a37a66f07951a471c557de4dbac2d2cfc7",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 }
             ],
             "description": "A library for unpacking BZFlag network packets",
-            "time": "2020-05-27T01:45:51+00:00"
+            "time": "2020-05-27T05:54:45+00:00"
         },
         {
             "name": "meyfa/php-svg",
@@ -2928,6 +2928,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1"
+    },
     "platform-dev": []
 }

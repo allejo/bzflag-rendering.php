@@ -1,0 +1,206 @@
+# BZFlag client: saved world on Tue May 26 22:41:28 2020
+
+options
+  -ms 5
+end
+
+dynamicColor
+  name LinkMaterial
+  red limits 0 0.25
+  red sinusoid 2 0 1
+  green limits 0 0.25
+  green sinusoid 2 0.666667 1
+  blue limits 0 0.25
+  blue sinusoid 2 1.33333 1
+  alpha limits 0.75 0.75
+end
+
+textureMatrix
+  name LinkMaterial
+  shift 0 -0.05
+end
+
+material
+  name LinkMaterial
+  dyncol LinkMaterial
+  diffuse 0 0 0 0.5
+  nolighting
+  addtexture telelink
+    texmat LinkMaterial
+end
+
+box
+  position -136.789 156.977 0
+  size 30 30 9.42
+  rotation 103.052
+end
+box
+  position -137.895 107.357 0
+  size 30 30 9.42
+  rotation 2.31702
+end
+box
+  position 389.529 290.295 0
+  size 30 30 9.42
+  rotation 278.882
+end
+box
+  position -27.6402 310.942 0
+  size 30 30 9.42
+  rotation 169.045
+end
+box
+  position -347.038 103.355 0
+  size 30 30 9.42
+  rotation 265.39
+end
+box
+  position 105.128 -121.647 0
+  size 30 30 9.42
+  rotation 355.766
+end
+box
+  position -221.948 253.305 0
+  size 30 30 9.42
+  rotation 31.2228
+end
+box
+  position 80.4848 -283.354 0
+  size 30 30 9.42
+  rotation 120.762
+end
+box
+  position -346.729 157.269 0
+  size 30 30 9.42
+  rotation 126.821
+end
+box
+  position -381.625 -109.587 0
+  size 30 30 9.42
+  rotation 213.048
+end
+box
+  position -158.599 -181.62 0
+  size 30 30 9.42
+  rotation 184.18
+end
+box
+  position 129.007 67.7432 0
+  size 30 30 9.42
+  rotation 303.593
+end
+pyramid
+  position 99.2889 -29.2201 0
+  size 8.2 8.2 10.25
+  rotation 331.372
+end
+pyramid
+  position -148.258 -18.9433 0
+  size 8.2 8.2 10.25
+  rotation 160.064
+end
+pyramid
+  position 295.716 114.499 0
+  size 8.2 8.2 10.25
+  rotation 215.643
+end
+pyramid
+  position -131.925 25.4411 0
+  size 8.2 8.2 10.25
+  rotation 24.6882
+end
+pyramid
+  position 263.293 97.113 0
+  size 8.2 8.2 10.25
+  rotation 73.2616
+end
+pyramid
+  position -25.6914 286.064 0
+  size 8.2 8.2 10.25
+  rotation 56.8994
+end
+pyramid
+  position -296.684 -46.1923 0
+  size 8.2 8.2 10.25
+  rotation 0.492476
+end
+pyramid
+  position 314.374 11.5031 0
+  size 8.2 8.2 10.25
+  rotation 47.7898
+end
+pyramid
+  position -329.451 -60.482 0
+  size 8.2 8.2 10.25
+  rotation 358.575
+end
+pyramid
+  position 151.034 56.1641 0
+  size 8.2 8.2 10.25
+  rotation 119.337
+end
+pyramid
+  position -4.04975 203.41 0
+  size 8.2 8.2 10.25
+  rotation 40.1429
+end
+pyramid
+  position 208.444 232.161 0
+  size 8.2 8.2 10.25
+  rotation 356.258
+end
+pyramid
+  position 97.5055 81.5761 0
+  size 8.2 8.2 10.25
+  rotation 86.3581
+end
+pyramid
+  position -262.193 107.5 0
+  size 8.2 8.2 10.25
+  rotation 304.531
+end
+pyramid
+  position -277.053 136.439 0
+  size 8.2 8.2 10.25
+  rotation 39.4301
+end
+pyramid
+  position 383.007 -397.63 0
+  size 8.2 8.2 10.25
+  rotation 213.409
+end
+pyramid
+  position -76.2248 100.279 0
+  size 8.2 8.2 10.25
+  rotation 159.462
+end
+pyramid
+  position -278.186 -7.4528 0
+  size 8.2 8.2 10.25
+  rotation 348.729
+end
+pyramid
+  position 117.664 261.193 0
+  size 8.2 8.2 10.25
+  rotation 184.42
+end
+pyramid
+  position -80.5427 362.307 0
+  size 8.2 8.2 10.25
+  rotation 105.009
+end
+pyramid
+  position 312.005 337.26 0
+  size 8.2 8.2 10.25
+  rotation 352.974
+end
+pyramid
+  position 91.6146 108.594 0
+  size 8.2 8.2 10.25
+  rotation 112.97
+end
+pyramid
+  position -78.9628 -271.204 0
+  size 8.2 8.2 10.25
+  rotation 290.078
+end
