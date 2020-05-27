@@ -28,17 +28,17 @@ abstract class BaseRenderer implements ISVGRenderable
 
     abstract public function exportSVG(): SVGNode;
 
-    public function getNormalizedPosX(): float
+    public function getNormalizedSvgX(): float
     {
         $length = $this->worldBoundary['x'] / 2;
 
         return $this->obstacle->getPosition()[0] + $length;
     }
 
-    public function getNormalizedPosY(): float
+    public function getNormalizedSvgY(): float
     {
-        $length = $this->worldBoundary['y'] / 2;
+        $length = $this->worldBoundary['y'] / -2;
 
-        return $this->obstacle->getPosition()[1] + $length;
+        return abs($this->obstacle->getPosition()[1] + $length);
     }
 }

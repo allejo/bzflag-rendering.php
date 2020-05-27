@@ -18,24 +18,27 @@ trait RectangularSVGTrait
     /** @var Obstacle */
     protected $obstacle;
 
-    abstract public function getNormalizedPosX(): float;
+    abstract public function getNormalizedSvgX(): float;
 
-    abstract public function getNormalizedPosY(): float;
+    abstract public function getNormalizedSvgY(): float;
 
     public function exportSVG(): SVGNode
     {
-        $size = $this->obstacle->getSize();
+        list($sizeX, $sizeY) = $this->obstacle->getSize();
+        $posX = $this->getNormalizedSvgX();
+        $posY = $this->getNormalizedSvgY();
+        $rot = $this->obstacle->getRotation();
 
         $svg = new SVGRect(
-            $this->getNormalizedPosX(),
-            $this->getNormalizedPosY(),
-            $size[0],
-            $size[1]
+            $this->getNormalizedSvgX(),
+            $this->getNormalizedSvgY(),
+            $sizeX,
+            $sizeY
         );
         $svg->setStyle('fill', 'rgb(0, 204, 255)');
         $svg->setAttribute(
             'transform',
-            sprintf('rotate(%d %d %d)', $this->obstacle->getRotation(), $this->getNormalizedPosX(), $this->getNormalizedPosY())
+            sprintf('rotate(%d %d %d)', $rot, $posX, $posY)
         );
 
         return $svg;

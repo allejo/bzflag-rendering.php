@@ -13,9 +13,9 @@ use SVG\Nodes\SVGNode;
 
 interface ISVGRenderable
 {
-    public function getNormalizedPosX(): float;
+    public function getNormalizedSvgX(): float;
 
-    public function getNormalizedPosY(): float;
+    public function getNormalizedSvgY(): float;
 
     public function exportSVG(): SVGNode;
 }
