@@ -21,7 +21,7 @@ class WorldRendererTest extends TestCase
 {
     public function testStart()
     {
-        $replay = new Replay(__DIR__ . '/../../fixtures/replay.rec');
+        $replay = new Replay(__DIR__ . '/../../fixtures/hix.rec');
         $world = $replay->getHeader()->getWorld();
 
         $renderer = new WorldRenderer($world);
