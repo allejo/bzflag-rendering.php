@@ -32,7 +32,7 @@ trait RectangularSVGTrait
         $svgPosX = $posX + ($worldBX / 2);
         $svgPosY = abs($posY + ($worldBY / -2));
 
-        $rot = $this->obstacle->getRotation();
+        $rot = -1 * $this->obstacle->getRotation();
 
         $svg = new SVGRect($svgPosX, $svgPosY, $sizeX, $sizeY);
         $svg->setStyle('fill', 'rgb(0, 204, 255)');
