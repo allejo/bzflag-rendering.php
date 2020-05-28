@@ -13,7 +13,6 @@ use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
-use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\Structures\SVGDocumentFragment;
 use SVG\SVG;
 
@@ -22,7 +21,7 @@ class WorldRenderer
     /** @var WorldDatabase */
     private $worldDatabase;
 
-    /** @var array{x: int, y: int} */
+    /** @phpstan-var WorldBoundary */
     private $worldBoundary;
 
     /** @var SVGDocumentFragment */
@@ -31,7 +30,7 @@ class WorldRenderer
     /** @var SVG */
     private $svg;
 
-    /** @var array<int, ObstacleType::*> */
+    /** @var array<ObstacleType::*, class-string> */
     private static $mapping = [
         ObstacleType::BOX_TYPE => BoxRenderer::class,
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
@@ -42,18 +41,13 @@ class WorldRenderer
         $this->worldDatabase = &$database;
         $this->worldBoundary = $this->calcWorldBoundary();
 
-        $this->svg = new SVG($this->worldBoundary['x'], $this->worldBoundary['y']);
+        $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
         $this->document = $this->svg->getDocument();
         $this->document->setStyle('border', '1px solid rgb(0, 204, 255)');
-
-        $rect = new SVGRect(0, 0, 30, 30);
-        $rect->setStyle('fill', 'rgb(0, 204, 255)');
-        $rect->setAttribute(
-            'transform',
-            'translate(-15 -15) scale(2 2) rotate(45 15 15)'
+        $this->document->setAttribute(
+            'viewBox',
+            sprintf('0 0 %d %d', $this->worldBoundary['x'], $this->worldBoundary['y'])
         );
-
-//        $this->document->addChild($rect);
 
         $this->renderObstacleSVGs();
     }
@@ -64,7 +58,7 @@ class WorldRenderer
     }
 
     /**
-     * @return array{x: int, y: int}
+     * @phpstan-return WorldBoundary
      */
     private function calcWorldBoundary(): array
     {
@@ -100,7 +94,7 @@ class WorldRenderer
         return $dimensions;
     }
 
-    private function renderObstacleSVGs()
+    private function renderObstacleSVGs(): void
     {
         $obstaclesByType = $this->worldDatabase
             ->getObstacleManager()
@@ -124,6 +118,9 @@ class WorldRenderer
         }
     }
 
+    /**
+     * @phpstan-return ISVGRenderable<Obstacle>|null
+     */
     private function getObjectRenderer(Obstacle $obstacle): ?ISVGRenderable
     {
         $renderer = self::$mapping[$obstacle->getObjectType()] ?? null;

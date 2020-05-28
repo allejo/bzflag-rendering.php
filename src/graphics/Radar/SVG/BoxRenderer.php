@@ -10,13 +10,28 @@
 namespace allejo\bzflag\graphics\Radar\SVG;
 
 use allejo\bzflag\world\Object\BoxBuilding;
+use SVG\Nodes\Shapes\SVGRect;
+use SVG\Nodes\SVGNode;
 
-class BoxRenderer extends BaseRenderer
+/**
+ * @extends ObstacleRenderer<BoxBuilding>
+ */
+class BoxRenderer extends ObstacleRenderer
 {
-    use RectangularSVGTrait;
-
-    public function __construct(BoxBuilding &$box, array $worldBoundary)
+    /**
+     * @param BoxBuilding   $box
+     * @param WorldBoundary $worldBoundary
+     */
+    public function __construct(&$box, array $worldBoundary)
     {
         parent::__construct($box, $worldBoundary);
+    }
+
+    public function exportSVG(): SVGNode
+    {
+        $svg = $this->objectToSvgNode(SVGRect::class);
+        $svg->setStyle('fill', '#04CCFF');
+
+        return $svg;
     }
 }

@@ -9,19 +9,39 @@
 
 namespace allejo\bzflag\graphics\Radar\SVG;
 
-use allejo\bzflag\world\Object\Obstacle;
-use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
-trait RectangularSVGTrait
+/**
+ * @phpstan-template T of \allejo\bzflag\world\Object\Obstacle
+ * @phpstan-implements ISVGRenderable<T>
+ */
+abstract class ObstacleRenderer implements ISVGRenderable
 {
-    /** @var Obstacle */
+    /** @phpstan-var T */
     protected $obstacle;
 
-    /** @var array{x: int, y: int} */
+    /** @phpstan-var WorldBoundary */
     protected $worldBoundary;
 
-    public function exportSVG(): SVGNode
+    /**
+     * @param T             $obstacle
+     * @param WorldBoundary $worldBoundary
+     */
+    public function __construct(&$obstacle, array $worldBoundary)
+    {
+        $this->obstacle = &$obstacle;
+        $this->worldBoundary = $worldBoundary;
+    }
+
+    abstract public function exportSVG(): SVGNode;
+
+    /**
+     * Translate the position, sizing, and rotation of a BZFlag world object to
+     * the SVG equivalent via `transform` alterations.
+     *
+     * @phpstan-param class-string $cls
+     */
+    protected function objectToSvgNode(string $cls): SVGNode
     {
         list($sizeX, $sizeY) = $this->obstacle->getSize();
         list($posX, $posY) = $this->obstacle->getPosition();
@@ -34,8 +54,7 @@ trait RectangularSVGTrait
 
         $rot = -1 * $this->obstacle->getRotation();
 
-        $svg = new SVGRect($svgPosX, $svgPosY, $sizeX, $sizeY);
-        $svg->setStyle('fill', 'rgb(0, 204, 255)');
+        $svg = new $cls($svgPosX, $svgPosY, $sizeX, $sizeY);
         $svg->setAttribute(
             'transform',
             implode(' ', [
