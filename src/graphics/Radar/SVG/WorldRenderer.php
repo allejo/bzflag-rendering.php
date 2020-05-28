@@ -13,6 +13,7 @@ use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
+use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\Structures\SVGDocumentFragment;
 use SVG\SVG;
 
@@ -44,6 +45,15 @@ class WorldRenderer
         $this->svg = new SVG($this->worldBoundary['x'], $this->worldBoundary['y']);
         $this->document = $this->svg->getDocument();
         $this->document->setStyle('border', '1px solid rgb(0, 204, 255)');
+
+        $rect = new SVGRect(0, 0, 30, 30);
+        $rect->setStyle('fill', 'rgb(0, 204, 255)');
+        $rect->setAttribute(
+            'transform',
+            'translate(-15 -15) scale(2 2) rotate(45 15 15)'
+        );
+
+//        $this->document->addChild($rect);
 
         $this->renderObstacleSVGs();
     }

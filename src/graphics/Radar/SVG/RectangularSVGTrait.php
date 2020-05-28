@@ -18,27 +18,31 @@ trait RectangularSVGTrait
     /** @var Obstacle */
     protected $obstacle;
 
-    abstract public function getNormalizedSvgX(): float;
-
-    abstract public function getNormalizedSvgY(): float;
+    /** @var array{x: int, y: int} */
+    protected $worldBoundary;
 
     public function exportSVG(): SVGNode
     {
         list($sizeX, $sizeY) = $this->obstacle->getSize();
-        $posX = $this->getNormalizedSvgX();
-        $posY = $this->getNormalizedSvgY();
+        list($posX, $posY) = $this->obstacle->getPosition();
+
+        $worldBX = $this->worldBoundary['x'];
+        $worldBY = $this->worldBoundary['y'];
+
+        $svgPosX = $posX + ($worldBX / 2);
+        $svgPosY = abs($posY + ($worldBY / -2));
+
         $rot = $this->obstacle->getRotation();
 
-        $svg = new SVGRect(
-            $this->getNormalizedSvgX(),
-            $this->getNormalizedSvgY(),
-            $sizeX,
-            $sizeY
-        );
+        $svg = new SVGRect($svgPosX, $svgPosY, $sizeX, $sizeY);
         $svg->setStyle('fill', 'rgb(0, 204, 255)');
         $svg->setAttribute(
             'transform',
-            sprintf('rotate(%d %d %d)', $rot, $posX, $posY)
+            implode(' ', [
+                sprintf('translate(%d %d)', -1 * ($svgPosX + $sizeX), -1 * ($svgPosY + $sizeY)),
+                'scale(2 2)',
+                sprintf('rotate(%d %d %d)', $rot, $svgPosX + ($sizeX / 2), $svgPosY + ($sizeY / 2)),
+            ])
         );
 
         return $svg;
