@@ -7,8 +7,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\graphics\Radar\SVG;
+namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -23,14 +24,24 @@ abstract class ObstacleRenderer implements ISVGRenderable
     /** @phpstan-var WorldBoundary */
     protected $worldBoundary;
 
+    /** @var bool */
+    protected $bzwAttributesEnabled;
+
     /**
-     * @param T             $obstacle
-     * @param WorldBoundary $worldBoundary
+     * @phpstan-param T             $obstacle
+     * @phpstan-param WorldBoundary $worldBoundary
+     *
+     * @param object $obstacle
      */
-    public function __construct(&$obstacle, array $worldBoundary)
+    public function __construct($obstacle, array $worldBoundary)
     {
-        $this->obstacle = &$obstacle;
+        $this->obstacle = $obstacle;
         $this->worldBoundary = $worldBoundary;
+    }
+
+    public function enableBzwAttributes(bool $enabled): void
+    {
+        $this->bzwAttributesEnabled = $enabled;
     }
 
     abstract public function exportSVG(): SVGNode;
@@ -43,8 +54,8 @@ abstract class ObstacleRenderer implements ISVGRenderable
      */
     protected function objectToSvgNode(string $cls): SVGNode
     {
-        list($sizeX, $sizeY) = $this->obstacle->getSize();
-        list($posX, $posY) = $this->obstacle->getPosition();
+        [$sizeX, $sizeY, $sizeZ] = $this->obstacle->getSize();
+        [$posX, $posY, $posZ] = $this->obstacle->getPosition();
 
         $worldBX = $this->worldBoundary['x'];
         $worldBY = $this->worldBoundary['y'];
@@ -63,6 +74,14 @@ abstract class ObstacleRenderer implements ISVGRenderable
                 sprintf('rotate(%.6f %.6f %.6f)', $rot, $svgPosX + ($sizeX / 2), $svgPosY + ($sizeY / 2)),
             ])
         );
+
+        if ($this->bzwAttributesEnabled)
+        {
+            $svg->setAttribute('data-bzw-type', $this->obstacle->getObjectType());
+            $svg->setAttribute('data-bzw-position', sprintf('%.2f %.2f %.2f', $posX, $posY, $posZ));
+            $svg->setAttribute('data-bzw-size', sprintf('%.2f %.2f %.2f', $sizeX, $sizeY, $sizeZ));
+            $svg->setAttribute('data-bzw-rotation', (string)round($this->obstacle->getRotation()));
+        }
 
         return $svg;
     }

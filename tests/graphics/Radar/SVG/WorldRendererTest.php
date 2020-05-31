@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\test\graphics\Radar\SVG;
 
-use allejo\bzflag\graphics\Radar\SVG\WorldRenderer;
+use allejo\bzflag\graphics\SVG\Radar\WorldRenderer;
 use allejo\bzflag\replays\Replay;
 use PHPUnit\Framework\TestCase;
 

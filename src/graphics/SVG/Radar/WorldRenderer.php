@@ -7,8 +7,9 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\graphics\Radar\SVG;
+namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
@@ -36,9 +37,9 @@ class WorldRenderer
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
     ];
 
-    public function __construct(WorldDatabase &$database)
+    public function __construct(WorldDatabase $database)
     {
-        $this->worldDatabase = &$database;
+        $this->worldDatabase = $database;
         $this->worldBoundary = $this->calcWorldBoundary();
 
         $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");

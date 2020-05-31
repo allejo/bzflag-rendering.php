@@ -7,24 +7,24 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\graphics\Radar\SVG;
+namespace allejo\bzflag\graphics\SVG\Radar;
 
-use allejo\bzflag\world\Object\BoxBuilding;
+use allejo\bzflag\world\Object\PyramidBuilding;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
- * @extends ObstacleRenderer<BoxBuilding>
+ * @extends ObstacleRenderer<\allejo\bzflag\world\Object\PyramidBuilding>
  */
-class BoxRenderer extends ObstacleRenderer
+class PyramidRenderer extends ObstacleRenderer
 {
     /**
-     * @param BoxBuilding   $box
-     * @param WorldBoundary $worldBoundary
+     * @param PyramidBuilding $pyramid
+     * @phpstan-param WorldBoundary $worldBoundary
      */
-    public function __construct(&$box, array $worldBoundary)
+    public function __construct($pyramid, array $worldBoundary)
     {
-        parent::__construct($box, $worldBoundary);
+        parent::__construct($pyramid, $worldBoundary);
     }
 
     public function exportSVG(): SVGNode

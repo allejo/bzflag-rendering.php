@@ -7,7 +7,7 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\graphics\Radar\SVG;
+namespace allejo\bzflag\graphics\SVG;
 
 use SVG\Nodes\SVGNode;
 
@@ -19,10 +19,19 @@ use SVG\Nodes\SVGNode;
 interface ISVGRenderable
 {
     /**
-     * @param T             $obstacle
-     * @param WorldBoundary $worldBoundary
+     * @phpstan-param T             $obstacle
+     * @phpstan-param WorldBoundary $worldBoundary
+     *
+     * @param object $obstacle
      */
-    public function __construct(&$obstacle, array $worldBoundary);
+    public function __construct($obstacle, array $worldBoundary);
+
+    /**
+     * Add BZW information as `data-` attributes to the SVG objects.
+     *
+     * @since 0.0.0
+     */
+    public function enableBzwAttributes(bool $enabled): void;
 
     /**
      * Get an SVG rendering of how this obstacle should look.
