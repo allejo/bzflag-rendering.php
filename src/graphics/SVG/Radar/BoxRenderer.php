@@ -30,7 +30,7 @@ class BoxRenderer extends ObstacleRenderer
     public function exportSVG(): SVGNode
     {
         $svg = $this->objectToSvgNode(SVGRect::class);
-        $svg->setStyle('fill', '#04CCFF');
+        $svg->setAttribute('fill', '#04CCFF');
 
         return $svg;
     }

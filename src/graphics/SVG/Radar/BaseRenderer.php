@@ -40,7 +40,7 @@ class BaseRenderer extends ObstacleRenderer
         $teamColor = $this->obstacle->getTeam();
 
         $svg = $this->objectToSvgNode(SVGRect::class);
-        $svg->setAttribute('fill', 'transparent');
+        $svg->setAttribute('fill-opacity', '0');
         $svg->setAttribute('stroke', $this->getTeamColor($teamColor));
 
         if ($this->bzwAttributesEnabled)
