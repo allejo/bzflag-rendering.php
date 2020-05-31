@@ -36,6 +36,7 @@ class WorldRenderer
         ObstacleType::BOX_TYPE => BoxRenderer::class,
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
         ObstacleType::BASE_TYPE => BaseRenderer::class,
+        ObstacleType::TELE_TYPE => TeleporterRenderer::class,
     ];
 
     public function __construct(WorldDatabase $database)
