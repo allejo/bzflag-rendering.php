@@ -58,9 +58,9 @@ abstract class ObstacleRenderer implements ISVGRenderable
         $svg->setAttribute(
             'transform',
             implode(' ', [
-                sprintf('translate(%d %d)', -1 * ($svgPosX + $sizeX), -1 * ($svgPosY + $sizeY)),
+                sprintf('translate(%.6f %.6f)', -1 * ($svgPosX + $sizeX), -1 * ($svgPosY + $sizeY)),
                 'scale(2 2)',
-                sprintf('rotate(%d %d %d)', $rot, $svgPosX + ($sizeX / 2), $svgPosY + ($sizeY / 2)),
+                sprintf('rotate(%.6f %.6f %.6f)', $rot, $svgPosX + ($sizeX / 2), $svgPosY + ($sizeY / 2)),
             ])
         );
 
