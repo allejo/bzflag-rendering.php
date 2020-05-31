@@ -32,6 +32,12 @@ class TeleporterRenderer extends ObstacleRenderer
         $svg = $this->objectToSvgNode(SVGRect::class);
         $svg->setAttribute('stroke', 'yellow');
 
+        if ($this->bzwAttributesEnabled)
+        {
+            $svg->setAttribute('bzw:name', $this->obstacle->getName());
+            $svg->setAttribute('bzw:border', $this->obstacle->getBorder());
+        }
+
         return $svg;
     }
 }
