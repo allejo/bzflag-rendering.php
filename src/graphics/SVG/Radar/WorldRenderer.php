@@ -47,6 +47,7 @@ class WorldRenderer
         $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
         $this->document = $this->svg->getDocument();
         $this->document->setStyle('border', '1px solid rgb(0, 204, 255)');
+        $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
         $this->document->setAttribute(
             'viewBox',
             sprintf('0 0 %d %d', $this->worldBoundary['x'], $this->worldBoundary['y'])

@@ -77,10 +77,10 @@ abstract class ObstacleRenderer implements ISVGRenderable
 
         if ($this->bzwAttributesEnabled)
         {
-            $svg->setAttribute('data-bzw-type', $this->obstacle->getObjectType());
-            $svg->setAttribute('data-bzw-position', sprintf('%.2f %.2f %.2f', $posX, $posY, $posZ));
-            $svg->setAttribute('data-bzw-size', sprintf('%.2f %.2f %.2f', $sizeX, $sizeY, $sizeZ));
-            $svg->setAttribute('data-bzw-rotation', (string)round($this->obstacle->getRotation()));
+            $svg->setAttribute('bzw:type', $this->obstacle->getObjectType());
+            $svg->setAttribute('bzw:position', sprintf('%.2f %.2f %.2f', $posX, $posY, $posZ));
+            $svg->setAttribute('bzw:size', sprintf('%.2f %.2f %.2f', $sizeX, $sizeY, $sizeZ));
+            $svg->setAttribute('bzw:rotation', (string)round($this->obstacle->getRotation()));
         }
 
         return $svg;

@@ -45,7 +45,7 @@ class BaseRenderer extends ObstacleRenderer
 
         if ($this->bzwAttributesEnabled)
         {
-            $svg->setAttribute('data-bzw-team', (string)$teamColor);
+            $svg->setAttribute('bzw:team', (string)$teamColor);
         }
 
         return $svg;
