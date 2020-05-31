@@ -35,6 +35,7 @@ class WorldRenderer
     private static $mapping = [
         ObstacleType::BOX_TYPE => BoxRenderer::class,
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
+        ObstacleType::BASE_TYPE => BaseRenderer::class,
     ];
 
     public function __construct(WorldDatabase $database)
@@ -114,6 +115,7 @@ class WorldRenderer
                     continue;
                 }
 
+                $renderable->enableBzwAttributes(true);
                 $this->document->addChild($renderable->exportSVG());
             }
         }
