@@ -57,13 +57,13 @@ This project currently has support for drawing the following BZW 2.x object type
 | Object Type | Support            |
 |:------------|:-------------------|
 | arc         | :x:                |
-| base        | :heavy_check_mark: |
-| box         | :heavy_check_mark: |
+| base        | :white_check_mark: |
+| box         | :white_check_mark: |
 | cone        | :x:                |
 | mesh        | :x:                |
-| pyramid     | :heavy_check_mark: |
+| pyramid     | :white_check_mark: |
 | sphere      | :x:                |
-| teleporter  | :heavy_check_mark: |
+| teleporter  | :white_check_mark: |
 | tetra       | :x:                |
 
 ## License
