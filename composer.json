@@ -40,7 +40,7 @@
     },
     "scripts": {
         "fix": "php-cs-fixer fix",
-        "stan": "phpstan analyse src -c phpstan.neon.dist",
+        "stan": "phpstan analyse -c phpstan.neon.dist",
         "test": "phpunit"
     }
 }
