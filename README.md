@@ -5,13 +5,13 @@
 
 A PHP 7.1+ package for drawing BZFlag related things such as map thumbnails; this is a sister project to [bzflag-networking.php](https://github.com/allejo/bzflag-networking.php).
 
-## Namespaces in this package
+## Installation
 
-This package is dedicated to drawing and rendering BZFlag related images or files, meaning this will have dependencies for drawing. In order to allow these dependencies to be "opt-in," it is a separate package.
+This package can be installed via [Composer](https://getcomposer.org).
 
-However, the namespace of this project is shared with its sister project. The namespaces available in this package are the following:
-
-- `allejo\bzflag\graphics`
+```bash
+composer require allejo/bzflag-rendering.php
+```
 
 ## Usage
 
@@ -28,6 +28,14 @@ $renderer = new WorldRenderer($world);
 
 echo $renderer->exportStringSVG();
 ```
+
+### Namespaces in this package
+
+This package is dedicated to drawing and rendering BZFlag related images or files, meaning this will have dependencies for drawing. In order to allow these dependencies to be "opt-in," it is a separate package.
+
+However, the namespace of this project is shared with its sister project. The namespaces available in this package are the following:
+
+- `allejo\bzflag\graphics`
 
 ## Examples
 
