@@ -37,6 +37,7 @@ abstract class ObstacleRenderer implements ISVGRenderable
     {
         $this->obstacle = $obstacle;
         $this->worldBoundary = $worldBoundary;
+        $this->bzwAttributesEnabled = false;
     }
 
     public function enableBzwAttributes(bool $enabled): void

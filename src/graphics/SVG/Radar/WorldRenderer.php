@@ -9,8 +9,6 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
-use allejo\bzflag\graphics\SVG\ISVGRenderable;
-use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
@@ -30,14 +28,6 @@ class WorldRenderer
 
     /** @var SVG */
     private $svg;
-
-    /** @var array<ObstacleType::*, class-string> */
-    private static $mapping = [
-        ObstacleType::BOX_TYPE => BoxRenderer::class,
-        ObstacleType::PYR_TYPE => PyramidRenderer::class,
-        ObstacleType::BASE_TYPE => BaseRenderer::class,
-        ObstacleType::TELE_TYPE => TeleporterRenderer::class,
-    ];
 
     public function __construct(WorldDatabase $database)
     {
@@ -100,41 +90,20 @@ class WorldRenderer
 
     private function renderObstacleSVGs(): void
     {
-        $obstaclesByType = $this->worldDatabase
+        $world = $this->worldDatabase
             ->getObstacleManager()
             ->getWorld()
-            ->getObstaclesByType()
         ;
 
-        foreach ($obstaclesByType as $obstacles)
+        // The raw world definition outside of any group definitions
+        $worldRoot = new GroupDefinitionRenderer($world, $this->worldBoundary);
+        $this->document->addChild($worldRoot->exportSVG());
+
+        // Any instances of group definitions used inside of this world
+        foreach ($world->getGroupInstances() as $groupInstance)
         {
-            foreach ($obstacles as $obstacle)
-            {
-                $renderable = $this->getObjectRenderer($obstacle);
-
-                if ($renderable === null)
-                {
-                    continue;
-                }
-
-                $renderable->enableBzwAttributes(true);
-                $this->document->addChild($renderable->exportSVG());
-            }
+            $instance = new GroupInstanceRenderer($groupInstance, $this->worldBoundary);
+            $this->document->addChild($instance->exportSVG());
         }
-    }
-
-    /**
-     * @phpstan-return ISVGRenderable<Obstacle>|null
-     */
-    private function getObjectRenderer(Obstacle $obstacle): ?ISVGRenderable
-    {
-        $renderer = self::$mapping[$obstacle->getObjectType()] ?? null;
-
-        if ($renderer === null)
-        {
-            return null;
-        }
-
-        return new $renderer($obstacle, $this->worldBoundary);
     }
 }

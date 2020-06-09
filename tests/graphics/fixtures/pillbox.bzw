@@ -1,0 +1,235 @@
+# BZFlag client: saved world on Sat Jun  6 16:40:31 2020
+
+options
+  -c
+  -mp 2,2,2,0,0,2
+  -a 45 38
+  -ms 3
+  -set _disableBots 1
+  -set _jumpVelocity 0
+  -set _rejoinTime 0
+  -set _worldSize 600
+end
+
+world
+  size 300
+end
+
+dynamicColor
+  name LinkMaterial
+  red limits 0 0.25
+  red sinusoid 2 0 1
+  green limits 0 0.25
+  green sinusoid 2 0.666667 1
+  blue limits 0 0.25
+  blue sinusoid 2 1.33333 1
+  alpha limits 0.75 0.75
+end
+
+textureMatrix
+  name LinkMaterial
+  shift 0 -0.05
+end
+
+material
+  name LinkMaterial
+  dyncol LinkMaterial
+  diffuse 0 0 0 0.5
+  nolighting
+  addtexture telelink
+    texmat LinkMaterial
+end
+
+define stockade_box
+  box
+    position 0 0 0
+    size 5 5 10
+    rotation 0
+  end
+  pyramid
+    position 0 0 10
+    size 5 5 0.125
+    rotation 0
+  end
+enddef
+
+define stockade_pair
+  group stockade_box
+    shift -12.5 0 0
+  end
+  group stockade_box
+    shift 12.5 0 0
+  end
+enddef
+
+define stockade_quad
+  group stockade_pair
+    shift -25 0 0
+  end
+  group stockade_pair
+    shift 25 0 0
+  end
+enddef
+
+define stockade
+  group stockade_box
+    shift 0 0 0
+  end
+  group stockade_pair
+    shift 37.5 0 0
+  end
+  group stockade_pair
+    spin 90 0 0 1
+    shift 0 37.5 0
+  end
+  group stockade_quad
+    shift 25 -23.75 0
+  end
+  group stockade_quad
+    spin 90 0 0 1
+    shift -23.75 25 0
+  end
+enddef
+
+define hedgerow_box
+  box
+    position 0 0 0
+    size 10 10 10
+    rotation 45
+  end
+  pyramid
+    position 0 0 10
+    size 10 10 0.125
+    rotation 45
+  end
+enddef
+
+define hedgerow_pair
+  group hedgerow_box
+    shift -50 0 0
+  end
+  group hedgerow_box
+    shift 50 0 0
+  end
+enddef
+
+define hedgerow
+  group hedgerow_pair
+    shift 0 12.5 0
+  end
+  group hedgerow_box
+    shift -100 -12.5 0
+  end
+  group hedgerow_pair
+    shift 50 -12.5 0
+  end
+enddef
+
+define pillbox
+  box
+    position -8 -26 0
+    size 20 3 15
+    rotation 0
+  end
+  box
+    position -25 0 0
+    size 3 23 15
+    rotation 0
+  end
+  box
+    position 0 26 0
+    size 28 3 15
+    rotation 0
+  end
+  box
+    position 25 5.5 0
+    size 3 17.5 15
+    rotation 0
+  end
+  pyramid
+    position -8 -26 15
+    size 20 3 0.125
+    rotation 0
+  end
+  pyramid
+    position -25 0 15
+    size 3 23 0.125
+    rotation 0
+  end
+  pyramid
+    position 0 26 15
+    size 28 3 0.125
+    rotation 0
+  end
+  pyramid
+    position 25 5.5 15
+    size 3 17.5 0.125
+    rotation 0
+  end
+enddef
+
+define one_side
+  box
+    position 0 25.5 0
+    size 1 24.5 10
+    rotation 0
+  end
+  pyramid
+    position 0 25.5 10
+    size 1 24.5 0.125
+    rotation 0
+  end
+  pyramid
+    position 25.5 0 10
+    size 25.5 1 0.125
+    rotation 0
+  end
+  base
+    position 280 280 0
+    size 20 20 0
+    rotation 0
+    color 0
+  end
+  group stockade
+    shift 220 220 0
+  end
+  group hedgerow
+    shift 164 0 0
+  end
+  group hedgerow
+    spin 90 0 0 1
+    shift 0 185.75 0
+  end
+  group pillbox
+    scale 0.75 0.75 1
+    shift -175 220 0
+  end
+enddef
+
+box
+  position 0 0 0
+  size 51 1 10
+  rotation 0
+end
+group one_side
+  spin 0 0 0 1
+  team 1
+end
+group one_side
+  spin 180 0 0 1
+  team 2
+end
+zone
+  position 280 280 0
+  size 1 1 0
+  rotation 0
+  safety 1
+end
+
+zone
+  position -280 -280 0
+  size 1 1 0
+  rotation 0
+  safety 2
+end
+

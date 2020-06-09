@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/allejo/bzflag-networking.php.git",
-                "reference": "6dac78a37a66f07951a471c557de4dbac2d2cfc7"
+                "reference": "3ed7cdda09a30d355178c262d32941e247b8b5cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/6dac78a37a66f07951a471c557de4dbac2d2cfc7",
-                "reference": "6dac78a37a66f07951a471c557de4dbac2d2cfc7",
+                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/3ed7cdda09a30d355178c262d32941e247b8b5cf",
+                "reference": "3ed7cdda09a30d355178c262d32941e247b8b5cf",
                 "shasum": ""
             },
             "require": {
@@ -28,6 +28,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "maciejczyzewski/bottomline": "^0.2.0",
+                "pepakriz/phpstan-exception-rules": "^0.11.0",
                 "phpstan/phpstan": "^0.12.25",
                 "phpunit/phpunit": "^7.5"
             },
@@ -53,7 +54,25 @@
                 }
             ],
             "description": "A library for unpacking BZFlag network packets",
-            "time": "2020-05-27T05:54:45+00:00"
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/allejo",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/allejo",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/allejo",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://www.patreon.com/allejo",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-06-09T08:09:14+00:00"
         },
         {
             "name": "meyfa/php-svg",
@@ -2931,5 +2950,6 @@
     "platform": {
         "php": ">=7.1"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
