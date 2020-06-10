@@ -15,6 +15,8 @@ use SVG\Nodes\SVGNode;
 
 /**
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BaseBuilding>
+ *
+ * @todo Draw bases as boxes when team color is invalid
  */
 class BaseRenderer extends ObstacleRenderer
 {

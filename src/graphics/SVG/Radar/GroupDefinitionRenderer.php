@@ -10,6 +10,7 @@
 namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
+use allejo\bzflag\world\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Object\GroupDefinition;
 use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;
@@ -41,6 +42,9 @@ class GroupDefinitionRenderer extends ObstacleRenderer
         parent::__construct($groupDefinition, $worldBoundary);
     }
 
+    /**
+     * @throws GroupDefinitionNotFoundException
+     */
     public function exportSVG(): SVGNode
     {
         $group = new SVGGroup();
@@ -60,6 +64,14 @@ class GroupDefinitionRenderer extends ObstacleRenderer
                 $renderer->enableBzwAttributes($this->bzwAttributesEnabled);
                 $group->addChild($renderer->exportSVG());
             }
+        }
+
+        foreach ($this->obstacle->getGroupInstances() as $groupInstance)
+        {
+            $instance = new GroupInstanceRenderer($groupInstance, $this->worldBoundary);
+            $instance->enableBzwAttributes($this->bzwAttributesEnabled);
+
+            $group->addChild($instance->exportSVG());
         }
 
         return $group;

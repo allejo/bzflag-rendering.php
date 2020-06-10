@@ -25,6 +25,7 @@ class WorldRendererTest extends TestCase
         $world = $replay->getHeader()->getWorldDatabase();
 
         $renderer = new WorldRenderer($world);
+        $renderer->enableBzwAttributes(true);
         $rawSVG = $renderer->exportStringSVG();
 
         self::assertTrue(false);

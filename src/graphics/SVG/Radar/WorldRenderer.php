@@ -23,6 +23,9 @@ class WorldRenderer
     /** @phpstan-var WorldBoundary */
     private $worldBoundary;
 
+    /** @var bool */
+    private $bzwAttributesEnabled;
+
     /** @var SVGDocumentFragment */
     private $document;
 
@@ -33,6 +36,7 @@ class WorldRenderer
     {
         $this->worldDatabase = $database;
         $this->worldBoundary = $this->calcWorldBoundary();
+        $this->bzwAttributesEnabled = false;
 
         $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
         $this->document = $this->svg->getDocument();
@@ -42,12 +46,22 @@ class WorldRenderer
             'viewBox',
             sprintf('0 0 %d %d', $this->worldBoundary['x'], $this->worldBoundary['y'])
         );
+    }
 
-        $this->renderObstacleSVGs();
+    public function hasBzwAttributesEnabled(): bool
+    {
+        return $this->bzwAttributesEnabled;
+    }
+
+    public function enableBzwAttributes(bool $enabled): void
+    {
+        $this->bzwAttributesEnabled = $enabled;
     }
 
     public function exportStringSVG(): string
     {
+        $this->renderObstacleSVGs();
+
         return (string)$this->svg;
     }
 
@@ -97,13 +111,8 @@ class WorldRenderer
 
         // The raw world definition outside of any group definitions
         $worldRoot = new GroupDefinitionRenderer($world, $this->worldBoundary);
-        $this->document->addChild($worldRoot->exportSVG());
+        $worldRoot->enableBzwAttributes($this->bzwAttributesEnabled);
 
-        // Any instances of group definitions used inside of this world
-        foreach ($world->getGroupInstances() as $groupInstance)
-        {
-            $instance = new GroupInstanceRenderer($groupInstance, $this->worldBoundary);
-            $this->document->addChild($instance->exportSVG());
-        }
+        $this->document->addChild($worldRoot->exportSVG());
     }
 }

@@ -9,8 +9,11 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\world\GroupDefinitionNotFoundException;
+use allejo\bzflag\world\Object\BaseBuilding;
+use allejo\bzflag\world\Object\GroupDefinition;
 use allejo\bzflag\world\Object\GroupInstance;
-use SVG\Nodes\Shapes\SVGRect;
+use allejo\bzflag\world\Object\ObstacleType;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -30,12 +33,53 @@ class GroupInstanceRenderer extends ObstacleRenderer
         parent::__construct($instance, $worldBoundary);
     }
 
+    /**
+     * @throws GroupDefinitionNotFoundException
+     */
     public function exportSVG(): SVGNode
     {
         $worldDB = $this->obstacle->getWorldDatabase();
+        $groupDefName = $this->obstacle->getGroupDefinitionName();
+        $groupDefinition = clone $worldDB->getObstacleManager()->getGroupDefinition($groupDefName);
 
-        // TODO: Implement exportSVG() method.
+        $this->applyTeamModification($groupDefinition);
 
-        return new SVGRect();
+        $output = new GroupDefinitionRenderer($groupDefinition, $this->worldBoundary);
+        $output->enableBzwAttributes($this->bzwAttributesEnabled);
+        $svgNode = $output->exportSVG();
+
+        if ($this->bzwAttributesEnabled)
+        {
+            if (!empty($groupDefName))
+            {
+                $svgNode->setAttribute('bzw:name', $groupDefName);
+            }
+        }
+
+        return $svgNode;
+    }
+
+    private function applyTeamModification(GroupDefinition $groupDefinition): void
+    {
+        if (!$this->obstacle->isModifyTeam())
+        {
+            return;
+        }
+
+        $bases = $groupDefinition->getObstaclesByType(ObstacleType::BASE_TYPE);
+
+        /**
+         * @var int          $i
+         * @var BaseBuilding $base
+         */
+        foreach ($bases as $i => $base)
+        {
+            $newBase = clone $base;
+            $newBase->setTeam($this->obstacle->getTeam());
+
+            $bases[$i] = $newBase;
+        }
+
+        $groupDefinition->setObstaclesByType($bases, ObstacleType::BASE_TYPE);
     }
 }
