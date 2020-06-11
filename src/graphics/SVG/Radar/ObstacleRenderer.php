@@ -10,6 +10,7 @@
 namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
+use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -55,32 +56,33 @@ abstract class ObstacleRenderer implements ISVGRenderable
      */
     protected function objectToSvgNode(string $cls): SVGNode
     {
-        [$sizeX, $sizeY, $sizeZ] = $this->obstacle->getSize();
-        [$posX, $posY, $posZ] = $this->obstacle->getPosition();
+        $converter = new BzwToSvgCoordinates(
+            $this->obstacle->getPosition(),
+            $this->obstacle->getSize(),
+            $this->obstacle->getRotation(),
+            $this->worldBoundary
+        );
 
-        $worldBX = $this->worldBoundary['x'];
-        $worldBY = $this->worldBoundary['y'];
-
-        $svgPosX = $posX + ($worldBX / 2);
-        $svgPosY = abs($posY + ($worldBY / -2));
-
-        $rot = -1 * $this->obstacle->getRotation();
-
-        $svg = new $cls($svgPosX, $svgPosY, $sizeX, $sizeY);
+        $svg = new $cls(
+            $converter->getSvgPosition()[0],
+            $converter->getSvgPosition()[1],
+            $converter->getBzwSize()[0],
+            $converter->getBzwSize()[1]
+        );
         $svg->setAttribute(
             'transform',
             implode(' ', [
-                sprintf('translate(%.6f %.6f)', -1 * ($svgPosX + $sizeX), -1 * ($svgPosY + $sizeY)),
+                vsprintf('translate(%.6g %.6g)', $converter->getSvgTranslate()),
                 'scale(2 2)',
-                sprintf('rotate(%.6f %.6f %.6f)', $rot, $svgPosX + ($sizeX / 2), $svgPosY + ($sizeY / 2)),
+                vsprintf('rotate(%.6g %.6g %.6g)', $converter->getSvgRotate()),
             ])
         );
 
         if ($this->bzwAttributesEnabled)
         {
             $svg->setAttribute('bzw:type', $this->obstacle->getObjectType());
-            $svg->setAttribute('bzw:position', sprintf('%.2f %.2f %.2f', $posX, $posY, $posZ));
-            $svg->setAttribute('bzw:size', sprintf('%.2f %.2f %.2f', $sizeX, $sizeY, $sizeZ));
+            $svg->setAttribute('bzw:position', vsprintf('%.3g %.3g %.3g', $converter->getBzwPosition()));
+            $svg->setAttribute('bzw:size', vsprintf('%.3g %.3g %.3g', $converter->getBzwSize()));
             $svg->setAttribute('bzw:rotation', (string)round($this->obstacle->getRotation()));
         }
 
