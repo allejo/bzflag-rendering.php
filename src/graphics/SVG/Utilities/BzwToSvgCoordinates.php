@@ -17,39 +17,38 @@ class BzwToSvgCoordinates
     private $svgPosition;
 
     /** @var array{float, float} */
+    private $svgSize;
+
+    /** @var array{float, float} */
     private $svgTranslate;
 
     /** @var array{float, float, float} */
     private $svgRotate;
 
-    public function __construct(array $bzwPos, array $bzwSize, float $bzwRot, array $worldBoundary)
+    public function __construct(array $bzwPos, array $bzwSize, float $bzwRot)
     {
-        [$sizeX, $sizeY, $sizeZ] = $bzwSize;
-        [$posX, $posY, $posZ] = $bzwPos;
-
-        $worldBX = $worldBoundary['x'];
-        $worldBY = $worldBoundary['y'];
-
-        $svgPosX = $posX + ($worldBX / 2);
-        $svgPosY = abs($posY + ($worldBY / -2));
-
-        $rot = -1 * $bzwRot;
+        [$sizeX, $sizeY] = $bzwSize;
+        [$posX, $posY] = $bzwPos;
 
         $this->bzwPosition = $bzwPos;
         $this->bzwSize = $bzwSize;
         $this->bzwRotation = $bzwRot;
         $this->svgPosition = [
-            $svgPosX,
-            $svgPosY,
+            -1 * $sizeX,
+            -1 * $sizeY,
+        ];
+        $this->svgSize = [
+            $sizeX * 2,
+            $sizeY * 2,
         ];
         $this->svgTranslate = [
-            -1 * ($svgPosX + $sizeX),
-            -1 * ($svgPosY + $sizeY),
+            $posX,
+            $posY,
         ];
         $this->svgRotate = [
-            $rot,
-            $svgPosX + ($sizeX / 2),
-            $svgPosY + ($sizeY / 2),
+            $bzwRot,
+            0,
+            0,
         ];
     }
 
@@ -80,6 +79,14 @@ class BzwToSvgCoordinates
     public function getSvgPosition(): array
     {
         return $this->svgPosition;
+    }
+
+    /**
+     * @return array{float, float}
+     */
+    public function getSvgSize(): array
+    {
+        return $this->svgSize;
     }
 
     /**

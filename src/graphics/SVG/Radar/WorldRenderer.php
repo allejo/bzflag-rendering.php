@@ -44,8 +44,14 @@ class WorldRenderer
         $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
         $this->document->setAttribute(
             'viewBox',
-            sprintf('0 0 %d %d', $this->worldBoundary['x'], $this->worldBoundary['y'])
+            vsprintf('%d %d %d %d', [
+                $this->worldBoundary['x'] / -2,
+                $this->worldBoundary['y'] / -2,
+                $this->worldBoundary['x'],
+                $this->worldBoundary['y']
+            ])
         );
+        $this->document->setAttribute('transform', 'scale(1, -1)');
     }
 
     public function hasBzwAttributesEnabled(): bool

@@ -59,31 +59,29 @@ abstract class ObstacleRenderer implements ISVGRenderable
         $converter = new BzwToSvgCoordinates(
             $this->obstacle->getPosition(),
             $this->obstacle->getSize(),
-            $this->obstacle->getRotation(),
-            $this->worldBoundary
+            $this->obstacle->getRotation()
         );
 
         $svg = new $cls(
             $converter->getSvgPosition()[0],
             $converter->getSvgPosition()[1],
-            $converter->getBzwSize()[0],
-            $converter->getBzwSize()[1]
+            $converter->getSvgSize()[0],
+            $converter->getSvgSize()[1]
         );
         $svg->setAttribute(
             'transform',
             implode(' ', [
                 vsprintf('translate(%.6g %.6g)', $converter->getSvgTranslate()),
-                'scale(2 2)',
                 vsprintf('rotate(%.6g %.6g %.6g)', $converter->getSvgRotate()),
             ])
         );
 
         if ($this->bzwAttributesEnabled)
         {
-            $svg->setAttribute('bzw:type', $this->obstacle->getObjectType());
+            $svg->setAttribute('bzw:type', (string)$this->obstacle->getObjectType());
             $svg->setAttribute('bzw:position', vsprintf('%.3g %.3g %.3g', $converter->getBzwPosition()));
             $svg->setAttribute('bzw:size', vsprintf('%.3g %.3g %.3g', $converter->getBzwSize()));
-            $svg->setAttribute('bzw:rotation', (string)round($this->obstacle->getRotation()));
+            $svg->setAttribute('bzw:rotation', (string)round($converter->getBzwRotation()));
         }
 
         return $svg;
