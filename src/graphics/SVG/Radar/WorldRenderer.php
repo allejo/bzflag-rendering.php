@@ -109,6 +109,9 @@ class WorldRenderer implements IBzwAttributesAware
         $worldRoot = new GroupDefinitionRenderer($world, $this->worldBoundary);
         $worldRoot->enableBzwAttributes($this->bzwAttributesEnabled);
 
-        $this->document->addChild($worldRoot->exportSVG());
+        $worldRootSvg = $worldRoot->exportSVG();
+        $worldRootSvg->setAttribute('transform', 'scale(1, -1)');
+
+        $this->document->addChild($worldRootSvg);
     }
 }
