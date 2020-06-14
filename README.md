@@ -22,7 +22,7 @@ use allejo\bzflag\graphics\SVG\Radar\WorldRenderer;
 use allejo\bzflag\replays\Replay;
 
 $replay = new Replay('official-match.rec');
-$world = $replay->getHeader()->getWorld();
+$world = $replay->getHeader()->getWorldDatabase();
 
 $renderer = new WorldRenderer($world);
 
