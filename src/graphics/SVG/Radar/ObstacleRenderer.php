@@ -72,7 +72,7 @@ abstract class ObstacleRenderer implements ISVGRenderable
             'transform',
             implode(' ', [
                 vsprintf('translate(%.6g %.6g)', $converter->getSvgTranslate()),
-                vsprintf('rotate(%.6g %.6g %.6g)', $converter->getSvgRotate()),
+                vsprintf('rotate(%.6g %.6g %.6g)', $converter->getSvgRotation()),
             ])
         );
 

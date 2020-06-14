@@ -68,6 +68,7 @@ This project currently has support for drawing the following BZW 2.x object type
 | base        | :white_check_mark: |
 | box         | :white_check_mark: |
 | cone        | :x:                |
+| group       | :white_check_mark: |
 | mesh        | :x:                |
 | pyramid     | :white_check_mark: |
 | sphere      | :x:                |

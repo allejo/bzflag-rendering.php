@@ -48,7 +48,7 @@ class WorldRenderer
                 $this->worldBoundary['x'] / -2,
                 $this->worldBoundary['y'] / -2,
                 $this->worldBoundary['x'],
-                $this->worldBoundary['y']
+                $this->worldBoundary['y'],
             ])
         );
         $this->document->setAttribute('transform', 'scale(1, -1)');
