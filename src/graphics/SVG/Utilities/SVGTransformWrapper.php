@@ -9,12 +9,14 @@
 
 namespace allejo\bzflag\graphics\SVG\Utilities;
 
+use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
+use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use SVG\Nodes\SVGNode;
 
 /**
  * @internal
  */
-class SVGTransformWrapper
+class SVGTransformWrapper implements IBzwAttributesAware
 {
     use BzwAttributesAwareTrait;
 

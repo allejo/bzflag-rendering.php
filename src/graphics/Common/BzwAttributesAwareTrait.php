@@ -7,10 +7,10 @@
  * LICENSE.md file that was distributed with this source code.
  */
 
-namespace allejo\bzflag\graphics\SVG\Utilities;
+namespace allejo\bzflag\graphics\Common;
 
 /**
- * @internal
+ * Implements the {@see IBzwAttributesAware} interface.
  */
 trait BzwAttributesAwareTrait
 {
@@ -20,5 +20,10 @@ trait BzwAttributesAwareTrait
     public function enableBzwAttributes(bool $enabled): void
     {
         $this->bzwAttributesEnabled = $enabled;
+    }
+
+    public function hasBzwAttributesEnabled(): bool
+    {
+        return $this->bzwAttributesEnabled;
     }
 }

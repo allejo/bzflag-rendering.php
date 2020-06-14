@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use SVG\Nodes\SVGNode;
@@ -19,14 +20,13 @@ use SVG\Nodes\SVGNode;
  */
 abstract class ObstacleRenderer implements ISVGRenderable
 {
+    use BzwAttributesAwareTrait;
+
     /** @phpstan-var T */
     protected $obstacle;
 
     /** @phpstan-var WorldBoundary */
     protected $worldBoundary;
-
-    /** @var bool */
-    protected $bzwAttributesEnabled;
 
     /**
      * @phpstan-param T             $obstacle
@@ -39,11 +39,6 @@ abstract class ObstacleRenderer implements ISVGRenderable
         $this->obstacle = $obstacle;
         $this->worldBoundary = $worldBoundary;
         $this->bzwAttributesEnabled = false;
-    }
-
-    public function enableBzwAttributes(bool $enabled): void
-    {
-        $this->bzwAttributesEnabled = $enabled;
     }
 
     abstract public function exportSVG(): SVGNode;

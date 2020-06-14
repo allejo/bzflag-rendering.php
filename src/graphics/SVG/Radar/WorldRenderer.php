@@ -9,22 +9,23 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
+use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
 use SVG\Nodes\Structures\SVGDocumentFragment;
 use SVG\SVG;
 
-class WorldRenderer
+class WorldRenderer implements IBzwAttributesAware
 {
+    use BzwAttributesAwareTrait;
+
     /** @var WorldDatabase */
     private $worldDatabase;
 
     /** @phpstan-var WorldBoundary */
     private $worldBoundary;
-
-    /** @var bool */
-    private $bzwAttributesEnabled;
 
     /** @var SVGDocumentFragment */
     private $document;
@@ -51,17 +52,6 @@ class WorldRenderer
                 $this->worldBoundary['y'],
             ])
         );
-        $this->document->setAttribute('transform', 'scale(1, -1)');
-    }
-
-    public function hasBzwAttributesEnabled(): bool
-    {
-        return $this->bzwAttributesEnabled;
-    }
-
-    public function enableBzwAttributes(bool $enabled): void
-    {
-        $this->bzwAttributesEnabled = $enabled;
     }
 
     public function exportStringSVG(): string
