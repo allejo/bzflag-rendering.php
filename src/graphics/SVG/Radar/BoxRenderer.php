@@ -9,29 +9,72 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\SVG\ISVGStylable;
+use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBoxStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\IBoxStyle;
 use allejo\bzflag\world\Object\BoxBuilding;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BoxBuilding>
+ * @implements ISVGStylable<\allejo\bzflag\world\Object\BoxBuilding>
  */
-class BoxRenderer extends ObstacleRenderer
+class BoxRenderer extends ObstacleRenderer implements ISVGStylable
 {
+    /** @var IBoxStyle */
+    public static $STYLE;
+
+    /** @var BoxBuilding */
+    protected $obstacle;
+
     /**
      * @param BoxBuilding $box
      * @phpstan-param WorldBoundary $worldBoundary
      */
     public function __construct($box, array $worldBoundary)
     {
+        if (self::$STYLE === null)
+        {
+            self::$STYLE = new DefaultBoxStyle();
+        }
+
         parent::__construct($box, $worldBoundary);
     }
 
     public function exportSVG(): SVGNode
     {
         $svg = $this->objectToSvgNode(SVGRect::class);
-        $svg->setAttribute('fill', '#04CCFF');
+
+        self::stylizeSVGNode($svg, $this->obstacle);
+
+        if ($this->bzwAttributesEnabled)
+        {
+            self::attachBzwAttributes($svg, $this->obstacle);
+        }
 
         return $svg;
+    }
+
+    /**
+     * @phpstan-param T $obstacle
+     *
+     * @param BoxBuilding $obstacle
+     */
+    public static function attachBzwAttributes(SVGNode $node, $obstacle): void
+    {
+        $node->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
+        $node->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
+        $node->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
+    }
+
+    /**
+     * @phpstan-param T $obstacle
+     *
+     * @param BoxBuilding $obstacle
+     */
+    public static function stylizeSVGNode(SVGNode $node, $obstacle): void
+    {
+        $node->setAttribute('fill', self::$STYLE->getColor());
     }
 }

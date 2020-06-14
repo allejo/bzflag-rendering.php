@@ -11,6 +11,8 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\IBzwAttributesAware;
+use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultWorldStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\IWorldStyle;
 use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
@@ -20,6 +22,9 @@ use SVG\SVG;
 class WorldRenderer implements IBzwAttributesAware
 {
     use BzwAttributesAwareTrait;
+
+    /** @var IWorldStyle */
+    public static $STYLE;
 
     /** @var WorldDatabase */
     private $worldDatabase;
@@ -35,14 +40,24 @@ class WorldRenderer implements IBzwAttributesAware
 
     public function __construct(WorldDatabase $database)
     {
+        if (self::$STYLE === null)
+        {
+            self::$STYLE = new DefaultWorldStyle();
+        }
+
         $this->worldDatabase = $database;
         $this->worldBoundary = $this->calcWorldBoundary();
         $this->bzwAttributesEnabled = false;
 
         $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
         $this->document = $this->svg->getDocument();
-        $this->document->setStyle('border', '1px solid rgb(0, 204, 255)');
-        $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
+
+        if ($this->bzwAttributesEnabled)
+        {
+            $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
+        }
+
+        $this->document->setStyle('border', sprintf('1px solid %s', self::$STYLE->getBorderColor()));
         $this->document->setAttribute(
             'viewBox',
             vsprintf('%d %d %d %d', [

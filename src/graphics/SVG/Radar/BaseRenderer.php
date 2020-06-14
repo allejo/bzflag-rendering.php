@@ -9,24 +9,24 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\SVG\ISVGStylable;
+use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBaseStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\IBaseStyle;
 use allejo\bzflag\world\Object\BaseBuilding;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BaseBuilding>
- *
- * @todo Draw bases as boxes when team color is invalid
+ * @implements ISVGStylable<\allejo\bzflag\world\Object\BaseBuilding>
  */
-class BaseRenderer extends ObstacleRenderer
+class BaseRenderer extends ObstacleRenderer implements ISVGStylable
 {
-    /** @var array<int, string> */
-    private static $teamColors = [
-        1 => '#FF0000',
-        2 => '#00CA00',
-        3 => '#3368ff',
-        4 => '#FF01FF',
-    ];
+    /** @var IBaseStyle */
+    public static $STYLE;
+
+    /** @var BaseBuilding */
+    protected $obstacle;
 
     /**
      * @param BaseBuilding $base
@@ -34,27 +34,74 @@ class BaseRenderer extends ObstacleRenderer
      */
     public function __construct($base, array $worldBoundary)
     {
+        if (self::$STYLE === null)
+        {
+            self::$STYLE = new DefaultBaseStyle();
+        }
+
         parent::__construct($base, $worldBoundary);
     }
 
     public function exportSVG(): SVGNode
     {
         $teamColor = $this->obstacle->getTeam();
-
         $svg = $this->objectToSvgNode(SVGRect::class);
-        $svg->setAttribute('fill-opacity', '0');
-        $svg->setAttribute('stroke', $this->getTeamColor($teamColor));
+
+        if (!($teamColor >= 1 && $teamColor <= 4))
+        {
+            BoxRenderer::stylizeSVGNode($svg, null);
+        }
+        else
+        {
+            self::stylizeSVGNode($svg, $this->obstacle);
+        }
 
         if ($this->bzwAttributesEnabled)
         {
-            $svg->setAttribute('bzw:team', (string)$teamColor);
+            self::attachBzwAttributes($svg, $this->obstacle);
         }
 
         return $svg;
     }
 
-    private function getTeamColor(int $teamColor): string
+    /**
+     * @phpstan-param T $obstacle
+     *
+     * @param BaseBuilding $obstacle
+     */
+    public static function attachBzwAttributes(SVGNode $svg, $obstacle): void
     {
-        return self::$teamColors[$teamColor];
+        $svg->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
+        $svg->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
+        $svg->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
+        $svg->setAttribute('bzw:team', (string)$obstacle->getTeam());
+    }
+
+    /**
+     * @phpstan-param T $obstacle
+     *
+     * @param BaseBuilding $obstacle
+     */
+    public static function stylizeSVGNode(SVGNode $svg, $obstacle): void
+    {
+        $svg->setAttribute('fill-opacity', '0');
+        $svg->setAttribute('stroke', self::getTeamColor($obstacle->getTeam()));
+        $svg->setAttribute('stroke-width', '2');
+    }
+
+    private static function getTeamColor(int $teamColor): string
+    {
+        switch ($teamColor) {
+            case 1:
+                return self::$STYLE->getRedTeamColor();
+            case 2:
+                return self::$STYLE->getGreenTeamColor();
+            case 3:
+                return self::$STYLE->getBlueTeamColor();
+            case 4:
+                return self::$STYLE->getPurpleTeamColor();
+            default:
+                return '';
+        }
     }
 }
