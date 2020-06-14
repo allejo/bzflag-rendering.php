@@ -58,6 +58,11 @@ class GroupInstanceRenderer extends ObstacleRenderer
             {
                 $svgNode->setAttribute('bzw:name', $groupDefName);
             }
+
+            if ($this->obstacle->isModifyTeam())
+            {
+                $svgNode->setAttribute('bzw:team', $this->obstacle->getTeam());
+            }
         }
 
         return $svgNode;
@@ -101,11 +106,11 @@ class GroupInstanceRenderer extends ObstacleRenderer
 
                     break;
                 case TransformType::SHIFT_TRANSFORM:
-                    $transformWrapper->shift($transform->data[0], $transform->data[1], $transform->data[2]);
+                    $transformWrapper->shift(...$transform->data);
 
                     break;
                 case TransformType::SCALE_TRANSFORM:
-                    $transformWrapper->scale($transform->data[0], $transform->data[1], $transform->data[2]);
+                    $transformWrapper->scale(...$transform->data);
 
                     break;
                 default:
