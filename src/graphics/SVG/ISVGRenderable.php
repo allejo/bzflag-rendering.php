@@ -14,7 +14,7 @@ use SVG\Nodes\SVGNode;
 /**
  * @phpstan-template T of \allejo\bzflag\world\Object\Obstacle
  *
- * @since 0.0.0
+ * @since 0.1.0
  */
 interface ISVGRenderable
 {
@@ -29,14 +29,14 @@ interface ISVGRenderable
     /**
      * Add BZW information as `data-` attributes to the SVG objects.
      *
-     * @since 0.0.0
+     * @since 0.1.0
      */
     public function enableBzwAttributes(bool $enabled): void;
 
     /**
      * Get an SVG rendering of how this obstacle should look.
      *
-     * @since 0.0.0
+     * @since 0.1.0
      */
     public function exportSVG(): SVGNode;
 }
