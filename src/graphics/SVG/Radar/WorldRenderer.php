@@ -58,6 +58,7 @@ class WorldRenderer implements IBzwAttributesAware
         }
 
         $this->document->setStyle('border', sprintf('1px solid %s', self::$STYLE->getBorderColor()));
+        $this->document->setStyle('box-sizing', 'border-box');
         $this->document->setAttribute(
             'viewBox',
             vsprintf('%d %d %d %d', [
@@ -124,6 +125,8 @@ class WorldRenderer implements IBzwAttributesAware
         $worldRoot = new GroupDefinitionRenderer($world, $this->worldBoundary);
         $worldRoot->enableBzwAttributes($this->bzwAttributesEnabled);
 
+        // Invert the map along the X axis so our coordinates in the SVG
+        // document follow the cartesian coordinate system
         $worldRootSvg = $worldRoot->exportSVG();
         $worldRootSvg->setAttribute('transform', 'scale(1, -1)');
 
