@@ -35,6 +35,10 @@ class BzwToSvgCoordinates
     /** @var array{float, float, float} */
     private $svgRotate;
 
+    /**
+     * @param array{float|int, float|int, float|int} $bzwPos
+     * @param array{float|int, float|int, float|int} $bzwSize
+     */
     public function __construct(array $bzwPos, array $bzwSize, float $bzwRot)
     {
         [$sizeX, $sizeY] = $bzwSize;
@@ -44,16 +48,16 @@ class BzwToSvgCoordinates
         $this->bzwSize = $bzwSize;
         $this->bzwRotation = $bzwRot;
         $this->svgPosition = [
-            -1 * $sizeX,
-            -1 * $sizeY,
+            (float)-1 * $sizeX,
+            (float)-1 * $sizeY,
         ];
         $this->svgSize = [
-            $sizeX * 2,
-            $sizeY * 2,
+            (float)$sizeX * 2,
+            (float)$sizeY * 2,
         ];
         $this->svgTranslate = [
-            $posX,
-            $posY,
+            (float)$posX,
+            (float)$posY,
         ];
         $this->svgRotate = [
             $bzwRot,

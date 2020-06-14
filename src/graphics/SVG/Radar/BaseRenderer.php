@@ -65,9 +65,7 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param BaseBuilding $obstacle
+     * @param null|BaseBuilding $obstacle
      */
     public static function attachBzwAttributes(SVGNode $svg, $obstacle): void
     {
@@ -78,9 +76,7 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param BaseBuilding $obstacle
+     * @param null|BaseBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $svg, $obstacle): void
     {

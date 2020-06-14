@@ -15,7 +15,7 @@ use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use SVG\Nodes\SVGNode;
 
 /**
- * @phpstan-template T of \allejo\bzflag\world\Object\Obstacle
+ * @phpstan-template T
  * @phpstan-implements ISVGRenderable<T>
  */
 abstract class ObstacleRenderer implements ISVGRenderable

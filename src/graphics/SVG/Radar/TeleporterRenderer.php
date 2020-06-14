@@ -18,6 +18,7 @@ use SVG\Nodes\SVGNode;
 
 /**
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\Teleporter>
+ * @phpstan-implements ISVGStylable<\allejo\bzflag\world\Object\PyramidBuilding>
  */
 class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -56,23 +57,24 @@ class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param Teleporter $obstacle
+     * @param null|Teleporter $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
+        if ($obstacle === null)
+        {
+            return;
+        }
+
         $node->setAttribute('bzw:name', $obstacle->getName());
-        $node->setAttribute('bzw:border', $obstacle->getBorder());
+        $node->setAttribute('bzw:border', (string)$obstacle->getBorder());
         $node->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
         $node->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
         $node->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
     }
 
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param Teleporter $obstacle
+     * @param null|Teleporter $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {

@@ -61,7 +61,7 @@ class GroupInstanceRenderer extends ObstacleRenderer
 
             if ($this->obstacle->isModifyTeam())
             {
-                $svgNode->setAttribute('bzw:team', $this->obstacle->getTeam());
+                $svgNode->setAttribute('bzw:team', (string)$this->obstacle->getTeam());
             }
         }
 
@@ -75,6 +75,7 @@ class GroupInstanceRenderer extends ObstacleRenderer
             return;
         }
 
+        /** @var BaseBuilding[] $bases */
         $bases = $groupDefinition->getObstaclesByType(ObstacleType::BASE_TYPE);
 
         /**

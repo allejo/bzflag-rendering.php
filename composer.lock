@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/allejo/bzflag-networking.php.git",
-                "reference": "2e596b25d2960c06e6472d25d96367fd93b5b03d"
+                "reference": "19b28cdac298b97ce5baa8e249a9cf808cd21a3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/2e596b25d2960c06e6472d25d96367fd93b5b03d",
-                "reference": "2e596b25d2960c06e6472d25d96367fd93b5b03d",
+                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/19b28cdac298b97ce5baa8e249a9cf808cd21a3c",
+                "reference": "19b28cdac298b97ce5baa8e249a9cf808cd21a3c",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-06-10T05:22:56+00:00"
+            "time": "2020-06-14T08:09:45+00:00"
         },
         {
             "name": "meyfa/php-svg",

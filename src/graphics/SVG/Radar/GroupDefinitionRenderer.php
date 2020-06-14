@@ -9,6 +9,8 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
+use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\world\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Object\GroupDefinition;
@@ -18,12 +20,17 @@ use SVG\Nodes\Structures\SVGGroup;
 use SVG\Nodes\SVGNode;
 
 /**
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\PyramidBuilding>
+ * @implements ISVGRenderable<\allejo\bzflag\world\Object\GroupDefinition>
  */
-class GroupDefinitionRenderer extends ObstacleRenderer
+class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
 {
+    use BzwAttributesAwareTrait;
+
     /** @var GroupDefinition */
     protected $obstacle;
+
+    /** @phpstan-var WorldBoundary */
+    protected $worldBoundary;
 
     /** @var array<ObstacleType::*, class-string> */
     private static $mapping = [
@@ -39,7 +46,8 @@ class GroupDefinitionRenderer extends ObstacleRenderer
      */
     public function __construct($groupDefinition, array $worldBoundary)
     {
-        parent::__construct($groupDefinition, $worldBoundary);
+        $this->obstacle = $groupDefinition;
+        $this->worldBoundary = $worldBoundary;
     }
 
     /**

@@ -51,12 +51,6 @@ class WorldRenderer implements IBzwAttributesAware
 
         $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
         $this->document = $this->svg->getDocument();
-
-        if ($this->bzwAttributesEnabled)
-        {
-            $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
-        }
-
         $this->document->setStyle('border', sprintf('1px solid %s', self::$STYLE->getBorderColor()));
         $this->document->setStyle('box-sizing', 'border-box');
         $this->document->setAttribute(
@@ -72,6 +66,11 @@ class WorldRenderer implements IBzwAttributesAware
 
     public function exportStringSVG(): string
     {
+        if ($this->bzwAttributesEnabled)
+        {
+            $this->document->setAttribute('xmlns:bzw', 'http://schemas.allejo.dev/php/bzflag-rendering');
+        }
+
         $this->renderObstacleSVGs();
 
         return (string)$this->svg;

@@ -12,7 +12,7 @@ namespace allejo\bzflag\graphics\SVG;
 use SVG\Nodes\SVGNode;
 
 /**
- * @phpstan-template T of \allejo\bzflag\world\Object\Obstacle
+ * @phpstan-template T
  *
  * @since 0.1.0
  */

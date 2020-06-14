@@ -23,7 +23,7 @@ class SVGTransformWrapper implements IBzwAttributesAware
     /** @var SVGNode */
     private $svgNode;
 
-    /** @var array<int, array{string, string}> */
+    /** @var array<int, array{string, array<float|int>}> */
     private $transforms;
 
     /** @var array<int, array{string, string}> */

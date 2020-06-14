@@ -19,7 +19,7 @@ use SVG\Nodes\SVGNode;
 interface ISVGStylable
 {
     /**
-     * @phpstan-param T $obstacle
+     * @phpstan-param null|T $obstacle
      *
      * @since 0.1.1
      *
@@ -28,7 +28,7 @@ interface ISVGStylable
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void;
 
     /**
-     * @phpstan-param T $obstacle
+     * @phpstan-param null|T $obstacle
      *
      * @since 0.1.1
      *
