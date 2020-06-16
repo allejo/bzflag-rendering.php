@@ -56,7 +56,7 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     public function exportSVG(): SVGNode
     {
         $group = new SVGGroup();
-        $obstaclesByType = $this->obstacle->getObstaclesByType();
+        $obstaclesByType = $this->obstacle->getObstacles();
 
         foreach ($obstaclesByType as $obstacleType => $obstacles)
         {
