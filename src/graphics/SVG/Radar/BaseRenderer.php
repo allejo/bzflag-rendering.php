@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBaseStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\IBaseStyle;
@@ -17,6 +18,8 @@ use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @internal
+ *
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BaseBuilding>
  * @implements ISVGStylable<\allejo\bzflag\world\Object\BaseBuilding>
  */
@@ -30,9 +33,8 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
 
     /**
      * @param BaseBuilding $base
-     * @phpstan-param WorldBoundary $worldBoundary
      */
-    public function __construct($base, array $worldBoundary)
+    public function __construct($base, WorldBoundary $worldBoundary)
     {
         if (self::$STYLE === null)
         {

@@ -11,15 +11,18 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\IBzwAttributesAware;
+use allejo\bzflag\graphics\Common\IWorldRenderer;
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultWorldStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\IWorldStyle;
-use allejo\bzflag\world\Object\ObstacleType;
-use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
 use SVG\Nodes\Structures\SVGDocumentFragment;
 use SVG\SVG;
 
-class WorldRenderer implements IBzwAttributesAware
+/**
+ * @since 0.1.0
+ */
+class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
 {
     use BzwAttributesAwareTrait;
 
@@ -29,7 +32,7 @@ class WorldRenderer implements IBzwAttributesAware
     /** @var WorldDatabase */
     private $worldDatabase;
 
-    /** @phpstan-var WorldBoundary */
+    /** @var WorldBoundary */
     private $worldBoundary;
 
     /** @var SVGDocumentFragment */
@@ -46,22 +49,30 @@ class WorldRenderer implements IBzwAttributesAware
         }
 
         $this->worldDatabase = $database;
-        $this->worldBoundary = $this->calcWorldBoundary();
+        $this->worldBoundary = WorldBoundary::fromWorldDatabase($database);
         $this->bzwAttributesEnabled = false;
 
-        $this->svg = new SVG("{$this->worldBoundary['x']}px", "{$this->worldBoundary['y']}px");
+        $this->svg = new SVG(
+            "{$this->worldBoundary->getWorldWidthX()}px",
+            "{$this->worldBoundary->getWorldWidthY()}px"
+        );
         $this->document = $this->svg->getDocument();
         $this->document->setStyle('border', sprintf('1px solid %s', self::$STYLE->getBorderColor()));
         $this->document->setStyle('box-sizing', 'border-box');
         $this->document->setAttribute(
             'viewBox',
             vsprintf('%d %d %d %d', [
-                $this->worldBoundary['x'] / -2,
-                $this->worldBoundary['y'] / -2,
-                $this->worldBoundary['x'],
-                $this->worldBoundary['y'],
+                $this->worldBoundary->getWorldWidthX() / -2,
+                $this->worldBoundary->getWorldWidthY() / -2,
+                $this->worldBoundary->getWorldWidthX(),
+                $this->worldBoundary->getWorldWidthY(),
             ])
         );
+    }
+
+    public function getWorldBoundary(): WorldBoundary
+    {
+        return $this->worldBoundary;
     }
 
     public function exportStringSVG(): string
@@ -76,41 +87,9 @@ class WorldRenderer implements IBzwAttributesAware
         return (string)$this->svg;
     }
 
-    /**
-     * @phpstan-return WorldBoundary
-     */
-    private function calcWorldBoundary(): array
+    public function writeToFile(string $filePath): bool
     {
-        /** @var WallObstacle[] $walls */
-        $walls = $this->worldDatabase
-            ->getObstacleManager()
-            ->getWorld()
-            ->getObstaclesByType(ObstacleType::WALL_TYPE)
-        ;
-
-        if (count($walls) !== 4)
-        {
-            throw new \InvalidArgumentException('This library does not support drawing worlds with more than 4 walls');
-        }
-
-        $dimensions = [
-            'x' => 0,
-            'y' => 0,
-        ];
-
-        foreach ($walls as $wall)
-        {
-            if ($wall->getPosition()[0] === 0.0)
-            {
-                $dimensions['x'] += $wall->getBreadth();
-            }
-            elseif ($wall->getPosition()[1] === 0.0)
-            {
-                $dimensions['y'] += $wall->getBreadth();
-            }
-        }
-
-        return $dimensions;
+        return file_put_contents($filePath, $this->exportStringSVG()) !== false;
     }
 
     private function renderObstacleSVGs(): void

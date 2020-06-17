@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultTeleporterStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\ITeleporterStyle;
@@ -17,8 +18,10 @@ use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @internal
+ *
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\Teleporter>
- * @phpstan-implements ISVGStylable<\allejo\bzflag\world\Object\PyramidBuilding>
+ * @implements ISVGStylable<\allejo\bzflag\world\Object\PyramidBuilding>
  */
 class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -30,9 +33,8 @@ class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
 
     /**
      * @param Teleporter $teleporter
-     * @phpstan-param WorldBoundary $worldBoundary
      */
-    public function __construct($teleporter, array $worldBoundary)
+    public function __construct($teleporter, WorldBoundary $worldBoundary)
     {
         if (self::$STYLE === null)
         {

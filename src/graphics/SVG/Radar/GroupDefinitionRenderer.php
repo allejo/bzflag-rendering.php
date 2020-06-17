@@ -11,6 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\IBzwAttributesAware;
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\world\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Object\GroupDefinition;
@@ -20,6 +21,8 @@ use SVG\Nodes\Structures\SVGGroup;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @internal
+ *
  * @implements ISVGRenderable<\allejo\bzflag\world\Object\GroupDefinition>
  */
 class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
@@ -42,9 +45,8 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
 
     /**
      * @param GroupDefinition $groupDefinition
-     * @phpstan-param WorldBoundary $worldBoundary
      */
-    public function __construct($groupDefinition, array $worldBoundary)
+    public function __construct($groupDefinition, WorldBoundary $worldBoundary)
     {
         $this->obstacle = $groupDefinition;
         $this->worldBoundary = $worldBoundary;

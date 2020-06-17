@@ -10,11 +10,14 @@
 namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @internal
+ *
  * @phpstan-template T
  * @phpstan-implements ISVGRenderable<T>
  */
@@ -29,12 +32,11 @@ abstract class ObstacleRenderer implements ISVGRenderable
     protected $worldBoundary;
 
     /**
-     * @phpstan-param T             $obstacle
-     * @phpstan-param WorldBoundary $worldBoundary
+     * @phpstan-param T $obstacle
      *
      * @param object $obstacle
      */
-    public function __construct($obstacle, array $worldBoundary)
+    public function __construct($obstacle, WorldBoundary $worldBoundary)
     {
         $this->obstacle = $obstacle;
         $this->worldBoundary = $worldBoundary;

@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar;
 
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\Utilities\SVGTransformWrapper;
 use allejo\bzflag\world\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Modifiers\TransformType;
@@ -19,6 +20,8 @@ use allejo\bzflag\world\Object\ObstacleType;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @internal
+ *
  * @extends ObstacleRenderer<\allejo\bzflag\world\Object\GroupInstance>
  */
 class GroupInstanceRenderer extends ObstacleRenderer
@@ -28,9 +31,8 @@ class GroupInstanceRenderer extends ObstacleRenderer
 
     /**
      * @param GroupInstance $instance
-     * @phpstan-param WorldBoundary $worldBoundary
      */
-    public function __construct($instance, array $worldBoundary)
+    public function __construct($instance, WorldBoundary $worldBoundary)
     {
         parent::__construct($instance, $worldBoundary);
     }

@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class WorldRendererTest extends TestCase

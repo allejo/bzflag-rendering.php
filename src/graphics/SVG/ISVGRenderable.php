@@ -9,6 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG;
 
+use allejo\bzflag\graphics\Common\WorldBoundary;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -19,12 +20,11 @@ use SVG\Nodes\SVGNode;
 interface ISVGRenderable
 {
     /**
-     * @phpstan-param T             $obstacle
-     * @phpstan-param WorldBoundary $worldBoundary
+     * @phpstan-param T $obstacle
      *
      * @param object $obstacle
      */
-    public function __construct($obstacle, array $worldBoundary);
+    public function __construct($obstacle, WorldBoundary $worldBoundary);
 
     /**
      * Add BZW information as `data-` attributes to the SVG objects.
