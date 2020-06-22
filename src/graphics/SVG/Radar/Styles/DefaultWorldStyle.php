@@ -18,7 +18,7 @@ class DefaultWorldStyle implements IWorldStyle
 
     public function getBorderWidth(): int
     {
-        return 0;
+        return 1;
     }
 
     public function getFillColor(): string

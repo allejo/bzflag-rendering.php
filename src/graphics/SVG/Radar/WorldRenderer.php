@@ -15,7 +15,10 @@ use allejo\bzflag\graphics\Common\IWorldRenderer;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultWorldStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\IWorldStyle;
+use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
+use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use allejo\bzflag\world\WorldDatabase;
+use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\Structures\SVGDocumentFragment;
 use SVG\SVG;
 
@@ -57,8 +60,6 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
             "{$this->worldBoundary->getWorldWidthY()}px"
         );
         $this->document = $this->svg->getDocument();
-        $this->document->setStyle('border', sprintf('1px solid %s', self::$STYLE->getBorderColor()));
-        $this->document->setStyle('box-sizing', 'border-box');
         $this->document->setAttribute(
             'viewBox',
             vsprintf('%d %d %d %d', [
@@ -68,6 +69,8 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
                 $this->worldBoundary->getWorldWidthY(),
             ])
         );
+
+        $this->drawGround();
     }
 
     public function getWorldBoundary(): WorldBoundary
@@ -90,6 +93,35 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
     public function writeToFile(string $filePath): bool
     {
         return file_put_contents($filePath, $this->exportStringSVG()) !== false;
+    }
+
+    private function drawGround(): void
+    {
+        $converter = new BzwToSvgCoordinates(
+            [0, 0, 0],
+            [
+                ($this->worldBoundary->getWorldWidthX() / 2),
+                ($this->worldBoundary->getWorldWidthY() / 2),
+                0,
+            ],
+            0
+        );
+
+        $ground = new SVGRect(
+            (string)$converter->getSvgPosition()[0],
+            (string)$converter->getSvgPosition()[1],
+            (string)$converter->getSvgSize()[0],
+            (string)$converter->getSvgSize()[1]
+        );
+
+        SVGStylableUtilities::applyFill($ground, self::$STYLE->getFillColor());
+        SVGStylableUtilities::applyStroke(
+            $ground,
+            self::$STYLE->getBorderColor(),
+            self::$STYLE->getBorderWidth()
+        );
+
+        $this->document->addChild($ground);
     }
 
     private function renderObstacleSVGs(): void

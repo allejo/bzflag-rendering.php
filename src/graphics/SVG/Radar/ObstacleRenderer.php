@@ -60,10 +60,10 @@ abstract class ObstacleRenderer implements ISVGRenderable
         );
 
         $svg = new $cls(
-            $converter->getSvgPosition()[0],
-            $converter->getSvgPosition()[1],
-            $converter->getSvgSize()[0],
-            $converter->getSvgSize()[1]
+            (string)$converter->getSvgPosition()[0],
+            (string)$converter->getSvgPosition()[1],
+            (string)$converter->getSvgSize()[0],
+            (string)$converter->getSvgSize()[1]
         );
         $svg->setAttribute(
             'transform',
