@@ -11,6 +11,12 @@ namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
 interface IBaseStyle
 {
+    public function getBorderColor(int $team): string;
+
+    public function getBorderWidth(): int;
+
+    public function getFillColor(int $team): string;
+
     public function getRedTeamColor(): string;
 
     public function getGreenTeamColor(): string;

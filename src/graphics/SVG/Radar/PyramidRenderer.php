@@ -13,6 +13,7 @@ use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultPyramidStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\IPyramidStyle;
+use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\PyramidBuilding;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
@@ -79,6 +80,7 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {
-        $node->setAttribute('fill', self::$STYLE->getColor());
+        SVGStylableUtilities::applyFill($node, self::$STYLE->getFillColor());
+        SVGStylableUtilities::applyStroke($node, self::$STYLE->getBorderColor(), self::$STYLE->getBorderWidth());
     }
 }

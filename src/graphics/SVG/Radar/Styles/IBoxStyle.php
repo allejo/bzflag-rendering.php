@@ -11,5 +11,9 @@ namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
 interface IBoxStyle
 {
-    public function getColor(): string;
+    public function getBorderColor(): string;
+
+    public function getBorderWidth(): int;
+
+    public function getFillColor(): string;
 }

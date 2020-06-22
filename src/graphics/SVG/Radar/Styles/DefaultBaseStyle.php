@@ -11,6 +11,32 @@ namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
 class DefaultBaseStyle implements IBaseStyle
 {
+    public function getBorderColor(int $team): string
+    {
+        switch ($team) {
+            case 1:
+                return $this->getRedTeamColor();
+            case 2:
+                return $this->getGreenTeamColor();
+            case 3:
+                return $this->getBlueTeamColor();
+            case 4:
+                return $this->getPurpleTeamColor();
+            default:
+                return 'transparent';
+        }
+    }
+
+    public function getBorderWidth(): int
+    {
+        return 2;
+    }
+
+    public function getFillColor(int $team): string
+    {
+        return 'transparent';
+    }
+
     public function getRedTeamColor(): string
     {
         return '#FF0000';

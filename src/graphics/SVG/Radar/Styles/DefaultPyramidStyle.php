@@ -11,7 +11,17 @@ namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
 class DefaultPyramidStyle implements IPyramidStyle
 {
-    public function getColor(): string
+    public function getBorderColor(): string
+    {
+        return 'transparent';
+    }
+
+    public function getBorderWidth(): int
+    {
+        return 0;
+    }
+
+    public function getFillColor(): string
     {
         return '#04CCFF';
     }

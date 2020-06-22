@@ -12,4 +12,8 @@ namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 interface IWorldStyle
 {
     public function getBorderColor(): string;
+
+    public function getBorderWidth(): int;
+
+    public function getFillColor(): string;
 }

@@ -15,4 +15,14 @@ class DefaultWorldStyle implements IWorldStyle
     {
         return '#04CCFF';
     }
+
+    public function getBorderWidth(): int
+    {
+        return 0;
+    }
+
+    public function getFillColor(): string
+    {
+        return 'transparent';
+    }
 }

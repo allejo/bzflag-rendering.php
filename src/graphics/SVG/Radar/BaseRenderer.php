@@ -13,6 +13,7 @@ use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBaseStyle;
 use allejo\bzflag\graphics\SVG\Radar\Styles\IBaseStyle;
+use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\BaseBuilding;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
@@ -82,24 +83,11 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
      */
     public static function stylizeSVGNode(SVGNode $svg, $obstacle): void
     {
-        $svg->setAttribute('fill-opacity', '0');
-        $svg->setAttribute('stroke', self::getTeamColor($obstacle->getTeam()));
-        $svg->setAttribute('stroke-width', '2');
-    }
+        $bdrColor = self::$STYLE->getBorderColor($obstacle->getTeam());
+        $bdrWidth = self::$STYLE->getBorderWidth();
+        $fillColor = self::$STYLE->getFillColor($obstacle->getTeam());
 
-    private static function getTeamColor(int $teamColor): string
-    {
-        switch ($teamColor) {
-            case 1:
-                return self::$STYLE->getRedTeamColor();
-            case 2:
-                return self::$STYLE->getGreenTeamColor();
-            case 3:
-                return self::$STYLE->getBlueTeamColor();
-            case 4:
-                return self::$STYLE->getPurpleTeamColor();
-            default:
-                return '';
-        }
+        SVGStylableUtilities::applyFill($svg, $fillColor);
+        SVGStylableUtilities::applyStroke($svg, $bdrColor, $bdrWidth);
     }
 }
