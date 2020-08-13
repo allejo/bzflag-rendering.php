@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0e508026f38c7c3cd078da166906581",
+    "content-hash": "822e1b8ca365e909ea61a3a26fb5daff",
     "packages": [
         {
             "name": "allejo/bzflag-networking.php",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/allejo/bzflag-networking.php.git",
@@ -3056,9 +3056,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "allejo/bzflag-networking.php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

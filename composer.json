@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=7.1",
-        "allejo/bzflag-networking.php": "^1.1-dev",
+        "allejo/bzflag-networking.php": "^1.1.0",
         "meyfa/php-svg": "^0.9.1"
     },
     "require-dev": {
