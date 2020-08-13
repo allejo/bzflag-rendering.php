@@ -13,7 +13,7 @@ use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
-use allejo\bzflag\world\GroupDefinitionNotFoundException;
+use allejo\bzflag\world\Exceptions\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Object\GroupDefinition;
 use allejo\bzflag\world\Object\Obstacle;
 use allejo\bzflag\world\Object\ObstacleType;

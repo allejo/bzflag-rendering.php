@@ -11,7 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\Utilities\SVGTransformWrapper;
-use allejo\bzflag\world\GroupDefinitionNotFoundException;
+use allejo\bzflag\world\Exceptions\GroupDefinitionNotFoundException;
 use allejo\bzflag\world\Modifiers\TransformType;
 use allejo\bzflag\world\Object\BaseBuilding;
 use allejo\bzflag\world\Object\GroupDefinition;
