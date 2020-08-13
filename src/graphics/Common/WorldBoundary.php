@@ -27,8 +27,10 @@ class WorldBoundary
     /**
      * @param WallObstacle[] $worldWalls
      */
-    public function __construct(array $worldWalls)
+    public function __construct(float $x, float $y, array $worldWalls)
     {
+        $this->x = $x;
+        $this->y = $y;
         $this->worldWalls = $worldWalls;
 
         foreach ($this->worldWalls as $wall)
@@ -64,6 +66,8 @@ class WorldBoundary
 
     public static function fromWorldDatabase(WorldDatabase $database): WorldBoundary
     {
+        $x = $y = $database->getBZDBManager()->getBZDBVariable('_worldSize');
+
         /** @var WallObstacle[] $walls */
         $walls = $database
             ->getObstacleManager()
@@ -71,6 +75,24 @@ class WorldBoundary
             ->getObstaclesByType(ObstacleType::WALL_TYPE)
         ;
 
-        return new self($walls);
+        if (count($walls) > 0)
+        {
+            $x = 0;
+            $y = 0;
+
+            foreach ($walls as $wall)
+            {
+                if ($wall->getPosition()[0] === 0.0)
+                {
+                    $x += $wall->getBreadth();
+                }
+                elseif ($wall->getPosition()[1] === 0.0)
+                {
+                    $y += $wall->getBreadth();
+                }
+            }
+        }
+
+        return new self($x, $y, $walls);
     }
 }
