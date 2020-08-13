@@ -32,18 +32,6 @@ class WorldBoundary
         $this->x = $x;
         $this->y = $y;
         $this->worldWalls = $worldWalls;
-
-        foreach ($this->worldWalls as $wall)
-        {
-            if ($wall->getPosition()[0] === 0.0)
-            {
-                $this->x += $wall->getBreadth();
-            }
-            elseif ($wall->getPosition()[1] === 0.0)
-            {
-                $this->y += $wall->getBreadth();
-            }
-        }
     }
 
     public function getWorldWidthX(): float
