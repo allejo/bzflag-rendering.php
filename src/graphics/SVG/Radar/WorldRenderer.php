@@ -13,8 +13,7 @@ use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use allejo\bzflag\graphics\Common\IWorldRenderer;
 use allejo\bzflag\graphics\Common\WorldBoundary;
-use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultWorldStyle;
-use allejo\bzflag\graphics\SVG\Radar\Styles\IWorldStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\WorldStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use allejo\bzflag\world\WorldDatabase;
@@ -29,7 +28,7 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
 {
     use BzwAttributesAwareTrait;
 
-    /** @var IWorldStyle */
+    /** @var WorldStyle */
     public static $STYLE;
 
     /** @var WorldDatabase */
@@ -48,7 +47,7 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
     {
         if (self::$STYLE === null)
         {
-            self::$STYLE = new DefaultWorldStyle();
+            self::$STYLE = new WorldStyle();
         }
 
         $this->worldDatabase = $database;

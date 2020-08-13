@@ -9,11 +9,20 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
-interface IPyramidStyle
+class PyramidStyle
 {
-    public function getBorderColor(): string;
+    public function getBorderColor(): string
+    {
+        return 'transparent';
+    }
 
-    public function getBorderWidth(): int;
+    public function getBorderWidth(): int
+    {
+        return 0;
+    }
 
-    public function getFillColor(): string;
+    public function getFillColor(): string
+    {
+        return '#04CCFF';
+    }
 }

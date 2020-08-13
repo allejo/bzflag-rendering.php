@@ -11,8 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
-use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBoxStyle;
-use allejo\bzflag\graphics\SVG\Radar\Styles\IBoxStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\BoxStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\BoxBuilding;
 use SVG\Nodes\Shapes\SVGRect;
@@ -26,7 +25,7 @@ use SVG\Nodes\SVGNode;
  */
 class BoxRenderer extends ObstacleRenderer implements ISVGStylable
 {
-    /** @var IBoxStyle */
+    /** @var BoxStyle */
     public static $STYLE;
 
     /** @var BoxBuilding */
@@ -39,7 +38,7 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     {
         if (self::$STYLE === null)
         {
-            self::$STYLE = new DefaultBoxStyle();
+            self::$STYLE = new BoxStyle();
         }
 
         parent::__construct($box, $worldBoundary);

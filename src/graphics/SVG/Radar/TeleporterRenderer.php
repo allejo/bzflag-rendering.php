@@ -11,8 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
-use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultTeleporterStyle;
-use allejo\bzflag\graphics\SVG\Radar\Styles\ITeleporterStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\TeleporterStyle;
 use allejo\bzflag\world\Object\Teleporter;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
@@ -25,7 +24,7 @@ use SVG\Nodes\SVGNode;
  */
 class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
 {
-    /** @var ITeleporterStyle */
+    /** @var TeleporterStyle */
     public static $STYLE;
 
     /** @var Teleporter */
@@ -38,7 +37,7 @@ class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
     {
         if (self::$STYLE === null)
         {
-            self::$STYLE = new DefaultTeleporterStyle();
+            self::$STYLE = new TeleporterStyle();
         }
 
         parent::__construct($teleporter, $worldBoundary);

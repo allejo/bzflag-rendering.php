@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
-class DefaultPyramidStyle implements IPyramidStyle
+class BoxStyle
 {
     public function getBorderColor(): string
     {

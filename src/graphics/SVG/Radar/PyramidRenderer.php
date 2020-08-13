@@ -11,8 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
-use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultPyramidStyle;
-use allejo\bzflag\graphics\SVG\Radar\Styles\IPyramidStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\PyramidStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\PyramidBuilding;
 use SVG\Nodes\Shapes\SVGRect;
@@ -26,7 +25,7 @@ use SVG\Nodes\SVGNode;
  */
 class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
 {
-    /** @var IPyramidStyle */
+    /** @var PyramidStyle */
     public static $STYLE;
 
     /** @var PyramidBuilding */
@@ -39,7 +38,7 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     {
         if (self::$STYLE === null)
         {
-            self::$STYLE = new DefaultPyramidStyle();
+            self::$STYLE = new PyramidStyle();
         }
 
         parent::__construct($pyramid, $worldBoundary);

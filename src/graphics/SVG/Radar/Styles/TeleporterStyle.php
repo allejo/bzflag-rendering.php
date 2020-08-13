@@ -9,11 +9,10 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
-interface IBoxStyle
+class TeleporterStyle
 {
-    public function getBorderColor(): string;
-
-    public function getBorderWidth(): int;
-
-    public function getFillColor(): string;
+    public function getColor(): string
+    {
+        return '#FEFF00';
+    }
 }

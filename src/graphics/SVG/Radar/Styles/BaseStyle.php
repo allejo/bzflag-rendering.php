@@ -9,7 +9,7 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
-class DefaultBaseStyle implements IBaseStyle
+class BaseStyle
 {
     public function getBorderColor(int $team): string
     {
@@ -57,8 +57,8 @@ class DefaultBaseStyle implements IBaseStyle
         return '#FF01FF';
     }
 
-    public function getFallbackBoxStyle(): IBoxStyle
+    public function getFallbackBoxStyle(): BoxStyle
     {
-        return new DefaultBoxStyle();
+        return new BoxStyle();
     }
 }

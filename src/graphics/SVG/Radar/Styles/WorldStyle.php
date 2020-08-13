@@ -9,10 +9,20 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
-class DefaultTeleporterStyle implements ITeleporterStyle
+class WorldStyle
 {
-    public function getColor(): string
+    public function getBorderColor(): string
     {
-        return '#FEFF00';
+        return '#04CCFF';
+    }
+
+    public function getBorderWidth(): int
+    {
+        return 1;
+    }
+
+    public function getFillColor(): string
+    {
+        return 'transparent';
     }
 }

@@ -11,8 +11,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
-use allejo\bzflag\graphics\SVG\Radar\Styles\DefaultBaseStyle;
-use allejo\bzflag\graphics\SVG\Radar\Styles\IBaseStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\BaseStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\BaseBuilding;
 use SVG\Nodes\Shapes\SVGRect;
@@ -26,7 +25,7 @@ use SVG\Nodes\SVGNode;
  */
 class BaseRenderer extends ObstacleRenderer implements ISVGStylable
 {
-    /** @var IBaseStyle */
+    /** @var BaseStyle */
     public static $STYLE;
 
     /** @var BaseBuilding */
@@ -39,7 +38,7 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
     {
         if (self::$STYLE === null)
         {
-            self::$STYLE = new DefaultBaseStyle();
+            self::$STYLE = new BaseStyle();
         }
 
         parent::__construct($base, $worldBoundary);
