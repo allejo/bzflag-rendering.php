@@ -15,9 +15,10 @@ composer require allejo/bzflag-rendering.php
 
 ## Usage
 
-This library currently supports exporting maps as SVGs. Using the `WorldRenderer` class, you can give it a `WorldDatabase` instance from version 1.1+ of `bzflag-networking.php`.
+This library currently supports exporting maps as SVGs or PNGs. Using the `WorldRenderer` class, you can give it a `WorldDatabase` instance from version 1.1+ of `bzflag-networking.php`.
 
 ```php
+// use allejo\bzflag\graphics\PNG\Radar\WorldRenderer;
 use allejo\bzflag\graphics\SVG\Radar\WorldRenderer;
 use allejo\bzflag\replays\Replay;
 
@@ -26,7 +27,7 @@ $world = $replay->getHeader()->getWorldDatabase();
 
 $renderer = new WorldRenderer($world);
 
-echo $renderer->exportStringSVG();
+echo $renderer->writeToFile("thumbnail.svg");
 ```
 
 ### Namespaces in this package
