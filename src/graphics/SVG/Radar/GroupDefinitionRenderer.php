@@ -41,6 +41,7 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
         ObstacleType::BASE_TYPE => BaseRenderer::class,
         ObstacleType::TELE_TYPE => TeleporterRenderer::class,
+        ObstacleType::MESH_TYPE => MeshRenderer::class,
     ];
 
     /**

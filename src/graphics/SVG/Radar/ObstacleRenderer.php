@@ -83,4 +83,21 @@ abstract class ObstacleRenderer implements ISVGRenderable
 
         return $svg;
     }
+
+    protected function meshToSVGNode(string $class): SVGNode
+    {
+
+        $svg = new $class(
+            $this->obstacle->getVertices(),
+        );
+
+        if ($this->bzwAttributesEnabled)
+        {
+            $svg->setAttribute('bzw:type', (string)$this->obstacle->getObjectType());
+            //$svg->setAttribute('bzw:vertex', vsprintf('%.3g %.3g %.3g', $converter->getBzwPosition()));
+            //$svg->setAttribute('bzw:facesize', (string)$obstacle->getFaceSize());
+            //$svg->setAttribute('bzw:face', implode(' ', $obstacle->getFaces()));
+        }
+        return $svg;
+    }
 }

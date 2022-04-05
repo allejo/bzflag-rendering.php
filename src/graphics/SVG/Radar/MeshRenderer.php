@@ -46,7 +46,7 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
 
     public function exportSVG(): SVGNode
     {
-        $svg = $this->objectToSvgNode(SVGPolygon::class);
+        $svg = $this->meshToSVGNode(SVGPolygon::class);
 
         self::stylizeSVGNode($svg, $this->obstacle);
 
@@ -63,15 +63,8 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
-        //$node->setAttribute('bzw:checktypes', implode(' ', $obstacle->getCheckTypes()));
-        //$node->setAttribute('bzw:checkpoints', implode(' ', $obstacle->getCheckPoints()));
-        //$node->setAttribute('bzw:vertexcount', (string)$obstacle->getVertexCount());
-        $node->setAttribute('bzw:vertices', implode(' ', $obstacle->getVertices()));
-        //$node->setAttribute('bzw:normalcount', (string)$obstacle->getNormalCount());
-        $node->setAttribute('bzw:normals', implode(' ', $obstacle->getNormals()));
-        //$node->setAttribute('bzw:texcoords', implode(' ', $obstacle->getTexCoords()));
-        $node->setAttribute('bzw:facesize', (string)$obstacle->getFaceSize());
-        $node->setAttribute('bzw:faces', implode(' ', $obstacle->getFaces()));
+        //$node->setAttribute('bzw:vertex', implode(' ', $obstacle->getVertices()[1]));
+    
     }
 
     /**
