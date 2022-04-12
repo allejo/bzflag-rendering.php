@@ -13,8 +13,7 @@ use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\MeshStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
-use allejo\bzflag\world\Object\MeshObstacle;
-use SVG\Nodes\Shapes\SVGPolygon;
+use SVG\Nodes\Structures\SVGGroup;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -46,7 +45,7 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
 
     public function exportSVG(): SVGNode
     {
-        $svg = $this->meshToSVGNode(SVGPolygon::class);
+        $svg = $this->meshToSVGNode(SVGGroup::class);
 
         self::stylizeSVGNode($svg, $this->obstacle);
 

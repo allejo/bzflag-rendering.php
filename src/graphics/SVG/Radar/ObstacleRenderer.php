@@ -13,6 +13,7 @@ use allejo\bzflag\graphics\Common\BzwAttributesAwareTrait;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGRenderable;
 use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
+use SVG\Nodes\Shapes\SVGPolygon;
 use SVG\Nodes\SVGNode;
 
 /**
@@ -86,10 +87,15 @@ abstract class ObstacleRenderer implements ISVGRenderable
 
     protected function meshToSVGNode(string $class): SVGNode
     {
-
-        $svg = new $class(
-            $this->obstacle->getVertices(),
-        );
+        $svg = new $class();
+        $svgPolygon = SVGPolygon::class;
+        foreach ($this->obstacle->getFaces() as $meshFace)
+        {
+            $mesh = new $svgPolygon(
+                $meshFace->getVertices(),
+            );
+            $svg->addChild($mesh);
+        }
 
         if ($this->bzwAttributesEnabled)
         {
