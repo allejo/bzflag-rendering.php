@@ -62,7 +62,7 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
-        //$node->setAttribute('bzw:vertex', implode(' ', $obstacle->getVertices()[1]));
+        $node->setAttribute('bzw:vertices', json_encode($obstacle->getVertices()));
     
     }
 
