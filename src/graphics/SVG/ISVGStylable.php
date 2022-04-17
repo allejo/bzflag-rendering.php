@@ -12,27 +12,23 @@ namespace allejo\bzflag\graphics\SVG;
 use SVG\Nodes\SVGNode;
 
 /**
- * @phpstan-template T of \allejo\bzflag\world\Object\Obstacle
+ * @template T of \allejo\bzflag\world\Object\Obstacle
  *
  * @since 0.1.1
  */
 interface ISVGStylable
 {
     /**
-     * @phpstan-param null|T $obstacle
+     * @param T $obstacle
      *
      * @since 0.1.1
-     *
-     * @param mixed $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void;
 
     /**
-     * @phpstan-param null|T $obstacle
+     * @param T $obstacle
      *
      * @since 0.1.1
-     *
-     * @param mixed $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void;
 }

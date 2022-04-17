@@ -18,23 +18,21 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @phpstan-template T
- * @phpstan-implements ISVGRenderable<T>
+ * @template T
+ * @implements ISVGRenderable<T>
  */
 abstract class ObstacleRenderer implements ISVGRenderable
 {
     use BzwAttributesAwareTrait;
 
-    /** @phpstan-var T */
+    /** @var T */
     protected $obstacle;
 
-    /** @phpstan-var WorldBoundary */
+    /** @var WorldBoundary */
     protected $worldBoundary;
 
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param object $obstacle
+     * @param T $obstacle
      */
     public function __construct($obstacle, WorldBoundary $worldBoundary)
     {
@@ -49,7 +47,7 @@ abstract class ObstacleRenderer implements ISVGRenderable
      * Translate the position, sizing, and rotation of a BZFlag world object to
      * the SVG equivalent via `transform` alterations.
      *
-     * @phpstan-param class-string $cls
+     * @param class-string<SVGNode> $cls
      */
     protected function objectToSvgNode(string $cls): SVGNode
     {

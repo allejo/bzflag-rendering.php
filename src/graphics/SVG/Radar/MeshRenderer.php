@@ -47,7 +47,7 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
 
     public function exportSVG(): SVGNode
     {
-        $svg = $this->meshToSVGNode(SVGGroup::class);
+        $svg = $this->meshToSVGNode();
 
         self::stylizeSVGNode($svg, $this->obstacle);
 
@@ -60,17 +60,17 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|MeshObstacle $obstacle
+     * @param MeshObstacle $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
         $node->setAttribute('bzw:type', (string)$obstacle->getObjectType());
-        $node->setAttribute('bzw:vertices', json_encode($obstacle->getVertices()));
-        $node->setAttribute('bzw:faces', json_encode($obstacle->getFaces()));
+        $node->setAttribute('bzw:vertices', json_encode($obstacle->getVertices()) ?: null);
+        $node->setAttribute('bzw:faces', json_encode($obstacle->getFaces()) ?: null);
     }
 
     /**
-     * @param null|MeshObstacle $obstacle
+     * @param MeshObstacle $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {
@@ -78,9 +78,9 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
         SVGStylableUtilities::applyStroke($node, self::$STYLE->getBorderColor(), self::$STYLE->getBorderWidth());
     }
 
-    protected function meshToSVGNode(string $class): SVGNode
+    protected function meshToSVGNode(): SVGNode
     {
-        $svg = new $class();
+        $svg = new SVGGroup();
 
         foreach ($this->obstacle->getFaces() as $meshFace)
         {

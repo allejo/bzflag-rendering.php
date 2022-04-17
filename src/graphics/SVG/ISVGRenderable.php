@@ -13,16 +13,14 @@ use allejo\bzflag\graphics\Common\WorldBoundary;
 use SVG\Nodes\SVGNode;
 
 /**
- * @phpstan-template T
+ * @template T
  *
  * @since 0.1.0
  */
 interface ISVGRenderable
 {
     /**
-     * @phpstan-param T $obstacle
-     *
-     * @param object $obstacle
+     * @param T $obstacle
      */
     public function __construct($obstacle, WorldBoundary $worldBoundary);
 

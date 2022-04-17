@@ -22,7 +22,7 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\GroupInstance>
+ * @extends ObstacleRenderer<GroupInstance>
  */
 class GroupInstanceRenderer extends ObstacleRenderer
 {
@@ -109,11 +109,11 @@ class GroupInstanceRenderer extends ObstacleRenderer
 
                     break;
                 case TransformType::SHIFT_TRANSFORM:
-                    $transformWrapper->shift(...$transform->data);
+                    $transformWrapper->shift(...array_slice($transform->data, 0, 3));
 
                     break;
                 case TransformType::SCALE_TRANSFORM:
-                    $transformWrapper->scale(...$transform->data);
+                    $transformWrapper->scale(...array_slice($transform->data, 0, 3));
 
                     break;
                 default:

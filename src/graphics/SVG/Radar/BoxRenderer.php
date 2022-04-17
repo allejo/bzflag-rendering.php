@@ -20,8 +20,8 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BoxBuilding>
- * @implements ISVGStylable<\allejo\bzflag\world\Object\BoxBuilding>
+ * @extends ObstacleRenderer<BoxBuilding>
+ * @implements ISVGStylable<BoxBuilding>
  */
 class BoxRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -59,7 +59,7 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|BoxBuilding $obstacle
+     * @param BoxBuilding $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
@@ -69,7 +69,7 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|BoxBuilding $obstacle
+     * @param BoxBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {

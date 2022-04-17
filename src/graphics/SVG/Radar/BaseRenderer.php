@@ -12,6 +12,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\BaseStyle;
+use allejo\bzflag\graphics\SVG\Radar\Styles\BoxStyle;
 use allejo\bzflag\graphics\SVG\SVGStylableUtilities;
 use allejo\bzflag\world\Object\BaseBuilding;
 use SVG\Nodes\Shapes\SVGRect;
@@ -20,8 +21,8 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\BaseBuilding>
- * @implements ISVGStylable<\allejo\bzflag\world\Object\BaseBuilding>
+ * @extends ObstacleRenderer<BaseBuilding>
+ * @implements ISVGStylable<BaseBuilding>
  */
 class BaseRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -46,17 +47,9 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
 
     public function exportSVG(): SVGNode
     {
-        $teamColor = $this->obstacle->getTeam();
         $svg = $this->objectToSvgNode(SVGRect::class);
 
-        if (!($teamColor >= 1 && $teamColor <= 4))
-        {
-            BoxRenderer::stylizeSVGNode($svg, null);
-        }
-        else
-        {
-            self::stylizeSVGNode($svg, $this->obstacle);
-        }
+        self::stylizeSVGNode($svg, $this->obstacle);
 
         if ($this->bzwAttributesEnabled)
         {
@@ -67,24 +60,36 @@ class BaseRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|BaseBuilding $obstacle
+     * @param BaseBuilding $obstacle
      */
-    public static function attachBzwAttributes(SVGNode $svg, $obstacle): void
+    public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
-        $svg->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
-        $svg->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
-        $svg->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
-        $svg->setAttribute('bzw:team', (string)$obstacle->getTeam());
+        $node->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
+        $node->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
+        $node->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
+        $node->setAttribute('bzw:team', (string)$obstacle->getTeam());
     }
 
     /**
-     * @param null|BaseBuilding $obstacle
+     * @param BaseBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $svg, $obstacle): void
     {
+        $teamColor = $obstacle->getTeam();
+
         $bdrColor = self::$STYLE->getBorderColor($obstacle->getTeam());
         $bdrWidth = self::$STYLE->getBorderWidth();
         $fillColor = self::$STYLE->getFillColor($obstacle->getTeam());
+
+        // If it's an invalid team color, draw it as a box
+        if (!($teamColor >= 1 && $teamColor <= 4))
+        {
+            $boxStyle = new BoxStyle();
+
+            $fillColor = $boxStyle->getFillColor();
+            $bdrColor = $boxStyle->getBorderColor();
+            $bdrWidth = $boxStyle->getBorderWidth();
+        }
 
         SVGStylableUtilities::applyFill($svg, $fillColor);
         SVGStylableUtilities::applyStroke($svg, $bdrColor, $bdrWidth);

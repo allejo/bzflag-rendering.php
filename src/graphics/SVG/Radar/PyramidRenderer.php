@@ -20,8 +20,8 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\PyramidBuilding>
- * @implements ISVGStylable<\allejo\bzflag\world\Object\PyramidBuilding>
+ * @extends ObstacleRenderer<PyramidBuilding>
+ * @implements ISVGStylable<PyramidBuilding>
  */
 class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -59,15 +59,10 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|PyramidBuilding $obstacle
+     * @param PyramidBuilding $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
-        if ($obstacle === null)
-        {
-            return;
-        }
-
         $node->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
         $node->setAttribute('bzw:size', implode(' ', $obstacle->getSize()));
         $node->setAttribute('bzw:rotation', (string)$obstacle->getRotation());
@@ -75,7 +70,7 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|PyramidBuilding $obstacle
+     * @param PyramidBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {

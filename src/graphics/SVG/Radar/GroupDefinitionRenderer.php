@@ -23,7 +23,7 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @implements ISVGRenderable<\allejo\bzflag\world\Object\GroupDefinition>
+ * @implements ISVGRenderable<GroupDefinition>
  */
 class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
 {
@@ -32,10 +32,10 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     /** @var GroupDefinition */
     protected $obstacle;
 
-    /** @phpstan-var WorldBoundary */
+    /** @var WorldBoundary */
     protected $worldBoundary;
 
-    /** @var array<ObstacleType::*, class-string> */
+    /** @var array<ObstacleType::*, class-string<ObstacleRenderer<mixed>>> */
     private static $mapping = [
         ObstacleType::BOX_TYPE => BoxRenderer::class,
         ObstacleType::PYR_TYPE => PyramidRenderer::class,
@@ -89,7 +89,7 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     }
 
     /**
-     * @phpstan-return ISVGRenderable<Obstacle>|null
+     * @return null|ISVGRenderable<Obstacle>
      */
     private function getObjectRenderer(Obstacle $obstacle): ?ISVGRenderable
     {

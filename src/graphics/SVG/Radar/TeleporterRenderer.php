@@ -12,6 +12,7 @@ namespace allejo\bzflag\graphics\SVG\Radar;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\ISVGStylable;
 use allejo\bzflag\graphics\SVG\Radar\Styles\TeleporterStyle;
+use allejo\bzflag\world\Object\PyramidBuilding;
 use allejo\bzflag\world\Object\Teleporter;
 use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
@@ -19,8 +20,8 @@ use SVG\Nodes\SVGNode;
 /**
  * @internal
  *
- * @extends ObstacleRenderer<\allejo\bzflag\world\Object\Teleporter>
- * @implements ISVGStylable<\allejo\bzflag\world\Object\PyramidBuilding>
+ * @extends ObstacleRenderer<Teleporter>
+ * @implements ISVGStylable<PyramidBuilding>
  */
 class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
 {
@@ -58,15 +59,10 @@ class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|Teleporter $obstacle
+     * @param Teleporter $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
     {
-        if ($obstacle === null)
-        {
-            return;
-        }
-
         $node->setAttribute('bzw:name', $obstacle->getName());
         $node->setAttribute('bzw:border', (string)$obstacle->getBorder());
         $node->setAttribute('bzw:position', implode(' ', $obstacle->getPosition()));
@@ -75,7 +71,7 @@ class TeleporterRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
-     * @param null|Teleporter $obstacle
+     * @param Teleporter $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
     {
