@@ -22,12 +22,16 @@ class BaseStyle
         switch ($team) {
             case 1:
                 return $this->getRedTeamColor();
+
             case 2:
                 return $this->getGreenTeamColor();
+
             case 3:
                 return $this->getBlueTeamColor();
+
             case 4:
                 return $this->getPurpleTeamColor();
+
             default:
                 return 'transparent';
         }

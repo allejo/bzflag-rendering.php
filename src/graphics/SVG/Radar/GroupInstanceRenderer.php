@@ -120,14 +120,17 @@ class GroupInstanceRenderer extends ObstacleRenderer
                     $transformWrapper->rotate(rad2deg($transform->data[3]));
 
                     break;
+
                 case TransformType::SHIFT_TRANSFORM:
                     $transformWrapper->shift(...array_slice($transform->data, 0, 3));
 
                     break;
+
                 case TransformType::SCALE_TRANSFORM:
                     $transformWrapper->scale(...array_slice($transform->data, 0, 3));
 
                     break;
+
                 default:
                     break;
             }

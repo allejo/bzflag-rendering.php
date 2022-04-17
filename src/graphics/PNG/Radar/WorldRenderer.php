@@ -16,6 +16,8 @@ use allejo\bzflag\graphics\Common\RequiredExtensionMissingException;
 use allejo\bzflag\graphics\Common\WorldBoundary;
 use allejo\bzflag\graphics\SVG\Radar\WorldRenderer as SVGWorldRenderer;
 use allejo\bzflag\world\WorldDatabase;
+use Imagick;
+use ImagickException;
 
 /**
  * @since 0.2.0
@@ -61,13 +63,13 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
      */
     public function writeToFile(string $filePath): bool
     {
-        $im = new \Imagick();
+        $im = new Imagick();
 
         try
         {
             $im->readImageBlob($this->renderer->exportStringSVG());
         }
-        catch (\ImagickException $e)
+        catch (ImagickException $e)
         {
             return false;
         }

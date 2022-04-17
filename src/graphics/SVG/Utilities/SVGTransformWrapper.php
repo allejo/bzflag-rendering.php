@@ -99,15 +99,18 @@ class SVGTransformWrapper implements IBzwAttributesAware
                     }
 
                     break;
+
                 case 'translate':
                     $transforms[] = vsprintf('translate(%.3g %.3g)', $args);
 
                     break;
+
                 case 'scale':
                     $argPattern = trim(str_repeat('%.3g ', count($args)));
                     $transforms[] = vsprintf(sprintf('scale(%s)', $argPattern), $args);
 
                     break;
+
                 default:
                     break;
             }
