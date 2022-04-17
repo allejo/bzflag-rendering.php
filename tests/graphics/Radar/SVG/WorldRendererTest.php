@@ -12,23 +12,59 @@ namespace allejo\bzflag\test\graphics\Radar\SVG;
 use allejo\bzflag\graphics\SVG\Radar\WorldRenderer;
 use allejo\bzflag\replays\Replay;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
- *
  * @coversNothing
  */
 class WorldRendererTest extends TestCase
 {
-    public function testStart()
+    /**
+     * @return iterable<array{string, string}>
+     */
+    public static function provideExampleRenderingsCases(): iterable
     {
-        $replay = new Replay(__DIR__ . '/../../fixtures/pillbox.rec');
-        $world = $replay->getHeader()->getWorldDatabase();
+        $fixturesDir = __DIR__ . '/../../fixtures/';
+        $examplesDir = __DIR__ . '/../../../../examples/';
+
+        $fsi = new Finder();
+        $fsi
+            ->in($fixturesDir)
+            ->name('*.rec')
+            ->files()
+        ;
+
+        foreach ($fsi->getIterator() as $item)
+        {
+            $fileNameNoExt = $item->getBasename('.rec');
+            $replayPath = $item->getRealPath();
+            $examplePath = realpath($examplesDir . $fileNameNoExt . '.svg');
+
+            if ($replayPath === false || $examplePath === false)
+            {
+                throw new RuntimeException("Could not evaluate replay or example path for: {$fileNameNoExt}");
+            }
+
+            yield [$replayPath, $examplePath];
+        }
+    }
+
+    /**
+     * @dataProvider provideExampleRenderingsCases
+     */
+    public function testExampleRenderings(string $replayPath, string $expectedSvgPath): void
+    {
+        $replay = new Replay($replayPath);
+        $world = $replay->getWorldDatabase();
 
         $renderer = new WorldRenderer($world);
         $renderer->enableBzwAttributes(true);
-        $rawSVG = $renderer->exportStringSVG();
 
-        self::assertTrue(false);
+        $expected = file_get_contents($expectedSvgPath);
+        $actual = $renderer->exportStringSVG();
+
+        self::assertEquals($expected, $actual);
     }
 }
