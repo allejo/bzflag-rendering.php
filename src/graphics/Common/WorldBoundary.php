@@ -24,14 +24,18 @@ class WorldBoundary
     /** @var float */
     private $y;
 
+    /** @var bool */
+    private $hasNoWalls;
+
     /**
      * @param WallObstacle[] $worldWalls
      */
-    public function __construct(float $x, float $y, array $worldWalls)
+    public function __construct(float $x, float $y, array $worldWalls, bool $hasNoWalls)
     {
         $this->x = $x;
         $this->y = $y;
         $this->worldWalls = $worldWalls;
+        $this->hasNoWalls = $hasNoWalls;
     }
 
     public function getWorldWidthX(): float
@@ -50,6 +54,11 @@ class WorldBoundary
     public function getWorldWalls(): array
     {
         return $this->worldWalls;
+    }
+
+    public function hasNoWalls(): bool
+    {
+        return $this->hasNoWalls;
     }
 
     public static function fromWorldDatabase(WorldDatabase $database): WorldBoundary
@@ -81,6 +90,8 @@ class WorldBoundary
             }
         }
 
-        return new self($x, $y, $walls);
+        $hasNoWalls = $database->getBZDBManager()->getBZDBVariable('noWalls');
+
+        return new self($x, $y, $walls, $hasNoWalls === 1);
     }
 }

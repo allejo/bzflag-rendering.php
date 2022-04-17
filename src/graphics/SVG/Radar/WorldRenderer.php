@@ -96,6 +96,12 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
 
     private function drawGround(): void
     {
+        // Don't draw our ground if our world is marked as having no walls
+        if ($this->worldBoundary->hasNoWalls())
+        {
+            return;
+        }
+
         $converter = new BzwToSvgCoordinates(
             [0, 0, 0],
             [
