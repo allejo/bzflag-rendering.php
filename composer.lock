@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "allejo/bzflag-networking.php",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/allejo/bzflag-networking.php.git",
-                "reference": "2c07725f1a74246fd0f80395b30910bb0fa1e27e"
+                "reference": "f4949258edc23954c72fa0e355dea727985f092c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/2c07725f1a74246fd0f80395b30910bb0fa1e27e",
-                "reference": "2c07725f1a74246fd0f80395b30910bb0fa1e27e",
+                "url": "https://api.github.com/repos/allejo/bzflag-networking.php/zipball/f4949258edc23954c72fa0e355dea727985f092c",
+                "reference": "f4949258edc23954c72fa0e355dea727985f092c",
                 "shasum": ""
             },
             "require": {
@@ -28,11 +28,11 @@
                 "symfony/deprecation-contracts": "^2.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^2.3",
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.10",
                 "maciejczyzewski/bottomline": "^0.2.0",
-                "pepakriz/phpstan-exception-rules": "^0.11.0",
-                "phpstan/phpstan": "^0.12.25",
+                "pepakriz/phpstan-exception-rules": "^0.12.0",
+                "phpstan/phpstan": "^1.5.4",
                 "phpunit/phpunit": "^7.5"
             },
             "type": "library",
@@ -57,6 +57,10 @@
                 }
             ],
             "description": "A library for unpacking BZFlag network packets",
+            "support": {
+                "issues": "https://github.com/allejo/bzflag-networking.php/issues",
+                "source": "https://github.com/allejo/bzflag-networking.php/tree/v1.1.1"
+            },
             "funding": [
                 {
                     "url": "https://www.buymeacoffee.com/allejo",
@@ -75,7 +79,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-08-12T07:54:16+00:00"
+            "time": "2022-04-05T04:48:27+00:00"
         },
         {
             "name": "meyfa/php-svg",
@@ -3063,5 +3067,5 @@
         "php": ">=7.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }
