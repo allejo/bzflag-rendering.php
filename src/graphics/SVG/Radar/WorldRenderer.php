@@ -43,6 +43,9 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
     /** @var SVG */
     private $svg;
 
+    /**
+     * @since 0.1.0
+     */
     public function __construct(WorldDatabase $database)
     {
         if (self::$STYLE === null)
@@ -72,11 +75,17 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
         $this->drawGround();
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getWorldBoundary(): WorldBoundary
     {
         return $this->worldBoundary;
     }
 
+    /**
+     * @since 0.1.0
+     */
     public function exportStringSVG(): string
     {
         if ($this->bzwAttributesEnabled)
@@ -89,11 +98,17 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
         return (string)$this->svg;
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function writeToFile(string $filePath): bool
     {
         return file_put_contents($filePath, $this->exportStringSVG()) !== false;
     }
 
+    /**
+     * @since 0.2.0
+     */
     private function drawGround(): void
     {
         // Don't draw our ground if our world is marked as having no walls
@@ -129,6 +144,9 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
         $this->document->addChild($ground);
     }
 
+    /**
+     * @since 0.1.0
+     */
     private function renderObstacleSVGs(): void
     {
         $world = $this->worldDatabase

@@ -10,6 +10,8 @@
 namespace allejo\bzflag\graphics\SVG\Utilities;
 
 /**
+ * @since 0.1.1
+ *
  * @internal
  */
 class BzwToSvgCoordinates
@@ -36,6 +38,8 @@ class BzwToSvgCoordinates
     private $svgRotate;
 
     /**
+     * @since 0.1.1
+     *
      * @param array{float|int, float|int, float|int} $bzwPos
      * @param array{float|int, float|int, float|int} $bzwSize
      */
@@ -67,6 +71,8 @@ class BzwToSvgCoordinates
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float, float}
      */
     public function getBzwPosition(): array
@@ -75,6 +81,8 @@ class BzwToSvgCoordinates
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float, float}
      */
     public function getBzwSize(): array
@@ -82,12 +90,17 @@ class BzwToSvgCoordinates
         return $this->bzwSize;
     }
 
+    /**
+     * @since 0.1.1
+     */
     public function getBzwRotation(): float
     {
         return $this->bzwRotation;
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float}
      */
     public function getSvgPosition(): array
@@ -96,6 +109,8 @@ class BzwToSvgCoordinates
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float}
      */
     public function getSvgSize(): array
@@ -104,6 +119,8 @@ class BzwToSvgCoordinates
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float}
      */
     public function getSvgTranslate(): array
@@ -112,6 +129,8 @@ class BzwToSvgCoordinates
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return array{float, float, float}
      */
     public function getSvgRotation(): array

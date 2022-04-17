@@ -9,8 +9,14 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
+/**
+ * @since 0.2.0
+ */
 class TeleporterStyle
 {
+    /**
+     * @since 0.2.0
+     */
     public function getColor(): string
     {
         return '#FEFF00';

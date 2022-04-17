@@ -9,6 +9,9 @@
 
 namespace allejo\bzflag\graphics\Common;
 
+/**
+ * @since 0.2.0
+ */
 class RequiredExtensionMissingException extends \RuntimeException
 {
 }

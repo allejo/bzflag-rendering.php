@@ -14,6 +14,8 @@ use allejo\bzflag\graphics\Common\IBzwAttributesAware;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.1
+ *
  * @internal
  */
 class SVGTransformWrapper implements IBzwAttributesAware
@@ -29,12 +31,18 @@ class SVGTransformWrapper implements IBzwAttributesAware
     /** @var array<int, array{string, string}> */
     private $bzwAttributes;
 
+    /**
+     * @since 0.1.1
+     */
     public function __construct(SVGNode $svgNode)
     {
         $this->svgNode = $svgNode;
         $this->transforms = [];
     }
 
+    /**
+     * @since 0.1.1
+     */
     public function rotate(float $deg, float $x = 0, float $y = 0): void
     {
         $args = array_filter([$deg, $x, $y]);
@@ -46,6 +54,9 @@ class SVGTransformWrapper implements IBzwAttributesAware
         }
     }
 
+    /**
+     * @since 0.1.1
+     */
     public function shift(float $x, float $y, float $z): void
     {
         $this->transforms[] = ['translate', [$x, $y]];
@@ -56,6 +67,9 @@ class SVGTransformWrapper implements IBzwAttributesAware
         }
     }
 
+    /**
+     * @since 0.1.1
+     */
     public function scale(float $x, float $y, float $z): void
     {
         $this->transforms[] = ['scale', array_filter([$x, $y])];
@@ -66,6 +80,9 @@ class SVGTransformWrapper implements IBzwAttributesAware
         }
     }
 
+    /**
+     * @since 0.1.1
+     */
     public function apply(): void
     {
         $reverse = array_reverse($this->transforms);

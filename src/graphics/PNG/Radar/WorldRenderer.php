@@ -31,6 +31,8 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
     protected $renderer;
 
     /**
+     * @since 0.2.0
+     *
      * @throws RequiredExtensionMissingException when the imagick PHP extension is not available
      */
     public function __construct(WorldDatabase $database)
@@ -46,11 +48,17 @@ class WorldRenderer implements IBzwAttributesAware, IWorldRenderer
         $this->renderer = new SVGWorldRenderer($this->worldDatabase);
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getWorldBoundary(): WorldBoundary
     {
         return $this->renderer->getWorldBoundary();
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function writeToFile(string $filePath): bool
     {
         $im = new \Imagick();

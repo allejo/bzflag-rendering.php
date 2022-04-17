@@ -16,6 +16,8 @@ use allejo\bzflag\graphics\SVG\Utilities\BzwToSvgCoordinates;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.0
+ *
  * @internal
  *
  * @template T
@@ -32,6 +34,8 @@ abstract class ObstacleRenderer implements ISVGRenderable
     protected $worldBoundary;
 
     /**
+     * @since 0.1.0
+     *
      * @param T $obstacle
      */
     public function __construct($obstacle, WorldBoundary $worldBoundary)
@@ -41,11 +45,16 @@ abstract class ObstacleRenderer implements ISVGRenderable
         $this->bzwAttributesEnabled = false;
     }
 
+    /**
+     * @since 0.1.0
+     */
     abstract public function exportSVG(): SVGNode;
 
     /**
      * Translate the position, sizing, and rotation of a BZFlag world object to
      * the SVG equivalent via `transform` alterations.
+     *
+     * @since 0.1.0
      *
      * @param class-string<SVGNode> $cls
      */

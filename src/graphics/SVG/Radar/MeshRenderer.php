@@ -19,6 +19,8 @@ use SVG\Nodes\Structures\SVGGroup;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.2.1
+ *
  * @internal
  *
  * @extends ObstacleRenderer<MeshObstacle>
@@ -33,6 +35,8 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
     protected $obstacle;
 
     /**
+     * @since 0.2.1
+     *
      * @param MeshObstacle $mesh
      */
     public function __construct($mesh, WorldBoundary $worldBoundary)
@@ -45,6 +49,9 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
         parent::__construct($mesh, $worldBoundary);
     }
 
+    /**
+     * @since 0.2.1
+     */
     public function exportSVG(): SVGNode
     {
         $svg = $this->meshToSVGNode();
@@ -60,6 +67,8 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.2.1
+     *
      * @param MeshObstacle $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
@@ -70,6 +79,8 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.2.1
+     *
      * @param MeshObstacle $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void
@@ -78,6 +89,9 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
         SVGStylableUtilities::applyStroke($node, self::$STYLE->getBorderColor(), self::$STYLE->getBorderWidth());
     }
 
+    /**
+     * @since 0.2.1
+     */
     protected function meshToSVGNode(): SVGNode
     {
         $svg = new SVGGroup();

@@ -11,8 +11,14 @@ namespace allejo\bzflag\graphics\SVG;
 
 use SVG\Nodes\SVGNode;
 
+/**
+ * @since 0.2.0
+ */
 abstract class SVGStylableUtilities
 {
+    /**
+     * @since 0.2.0
+     */
     public static function applyFill(SVGNode $node, string $fillColor): void
     {
         if ($fillColor === 'transparent')
@@ -25,6 +31,9 @@ abstract class SVGStylableUtilities
         }
     }
 
+    /**
+     * @since 0.2.0
+     */
     public static function applyStroke(SVGNode $node, string $color, int $width): void
     {
         if ($color === 'transparent')

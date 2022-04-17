@@ -18,6 +18,8 @@ use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.0
+ *
  * @internal
  *
  * @extends ObstacleRenderer<PyramidBuilding>
@@ -32,6 +34,8 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     protected $obstacle;
 
     /**
+     * @since 0.1.0
+     *
      * @param PyramidBuilding $pyramid
      */
     public function __construct($pyramid, WorldBoundary $worldBoundary)
@@ -44,6 +48,9 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
         parent::__construct($pyramid, $worldBoundary);
     }
 
+    /**
+     * @since 0.1.0
+     */
     public function exportSVG(): SVGNode
     {
         $svg = $this->objectToSvgNode(SVGRect::class);
@@ -59,6 +66,8 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @param PyramidBuilding $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
@@ -70,6 +79,8 @@ class PyramidRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @param PyramidBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void

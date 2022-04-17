@@ -21,6 +21,8 @@ use SVG\Nodes\Structures\SVGGroup;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.1
+ *
  * @internal
  *
  * @implements ISVGRenderable<GroupDefinition>
@@ -45,6 +47,8 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     ];
 
     /**
+     * @since 0.1.1
+     *
      * @param GroupDefinition $groupDefinition
      */
     public function __construct($groupDefinition, WorldBoundary $worldBoundary)
@@ -54,6 +58,8 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @throws GroupDefinitionNotFoundException
      */
     public function exportSVG(): SVGNode
@@ -89,6 +95,8 @@ class GroupDefinitionRenderer implements IBzwAttributesAware, ISVGRenderable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @return null|ISVGRenderable<Obstacle>
      */
     private function getObjectRenderer(Obstacle $obstacle): ?ISVGRenderable

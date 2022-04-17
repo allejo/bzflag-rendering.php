@@ -20,6 +20,8 @@ use allejo\bzflag\world\Object\ObstacleType;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.1
+ *
  * @internal
  *
  * @extends ObstacleRenderer<GroupInstance>
@@ -30,6 +32,8 @@ class GroupInstanceRenderer extends ObstacleRenderer
     protected $obstacle;
 
     /**
+     * @since 0.1.1
+     *
      * @param GroupInstance $instance
      */
     public function __construct($instance, WorldBoundary $worldBoundary)
@@ -38,6 +42,8 @@ class GroupInstanceRenderer extends ObstacleRenderer
     }
 
     /**
+     * @since 0.1.1
+     *
      * @throws GroupDefinitionNotFoundException
      */
     public function exportSVG(): SVGNode
@@ -70,6 +76,9 @@ class GroupInstanceRenderer extends ObstacleRenderer
         return $svgNode;
     }
 
+    /**
+     * @since 0.1.1
+     */
     private function applyTeamModification(GroupDefinition $groupDefinition): void
     {
         if (!$this->obstacle->isModifyTeam())
@@ -95,6 +104,9 @@ class GroupInstanceRenderer extends ObstacleRenderer
         $groupDefinition->setObstaclesByType($bases, ObstacleType::BASE_TYPE);
     }
 
+    /**
+     * @since 0.1.1
+     */
     private function applyTransformations(SVGNode $svgNode): void
     {
         $transforms = $this->obstacle->getTransform()->getTransforms();

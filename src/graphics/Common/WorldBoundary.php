@@ -13,6 +13,9 @@ use allejo\bzflag\world\Object\ObstacleType;
 use allejo\bzflag\world\Object\WallObstacle;
 use allejo\bzflag\world\WorldDatabase;
 
+/**
+ * @since 0.2.0
+ */
 class WorldBoundary
 {
     /** @var WallObstacle[] */
@@ -28,6 +31,8 @@ class WorldBoundary
     private $hasNoWalls;
 
     /**
+     * @since 0.2.0
+     *
      * @param WallObstacle[] $worldWalls
      */
     public function __construct(float $x, float $y, array $worldWalls, bool $hasNoWalls)
@@ -38,17 +43,25 @@ class WorldBoundary
         $this->hasNoWalls = $hasNoWalls;
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getWorldWidthX(): float
     {
         return $this->x;
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getWorldWidthY(): float
     {
         return $this->y;
     }
 
     /**
+     * @since 0.2.0
+     *
      * @return WallObstacle[]
      */
     public function getWorldWalls(): array
@@ -56,11 +69,17 @@ class WorldBoundary
         return $this->worldWalls;
     }
 
+    /**
+     * @since 0.2.2
+     */
     public function hasNoWalls(): bool
     {
         return $this->hasNoWalls;
     }
 
+    /**
+     * @since 0.2.0
+     */
     public static function fromWorldDatabase(WorldDatabase $database): WorldBoundary
     {
         $x = $y = $database->getBZDBManager()->getBZDBVariable('_worldSize');

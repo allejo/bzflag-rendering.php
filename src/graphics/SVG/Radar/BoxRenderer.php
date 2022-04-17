@@ -18,6 +18,8 @@ use SVG\Nodes\Shapes\SVGRect;
 use SVG\Nodes\SVGNode;
 
 /**
+ * @since 0.1.0
+ *
  * @internal
  *
  * @extends ObstacleRenderer<BoxBuilding>
@@ -32,6 +34,8 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     protected $obstacle;
 
     /**
+     * @since 0.1.0
+     *
      * @param BoxBuilding $box
      */
     public function __construct($box, WorldBoundary $worldBoundary)
@@ -44,6 +48,9 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
         parent::__construct($box, $worldBoundary);
     }
 
+    /**
+     * @since 0.1.0
+     */
     public function exportSVG(): SVGNode
     {
         $svg = $this->objectToSvgNode(SVGRect::class);
@@ -59,6 +66,8 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @param BoxBuilding $obstacle
      */
     public static function attachBzwAttributes(SVGNode $node, $obstacle): void
@@ -69,6 +78,8 @@ class BoxRenderer extends ObstacleRenderer implements ISVGStylable
     }
 
     /**
+     * @since 0.1.1
+     *
      * @param BoxBuilding $obstacle
      */
     public static function stylizeSVGNode(SVGNode $node, $obstacle): void

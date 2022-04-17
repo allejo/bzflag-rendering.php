@@ -9,18 +9,30 @@
 
 namespace allejo\bzflag\graphics\SVG\Radar\Styles;
 
+/**
+ * @since 0.2.0
+ */
 class BoxStyle
 {
+    /**
+     * @since 0.2.0
+     */
     public function getBorderColor(): string
     {
         return 'transparent';
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getBorderWidth(): int
     {
         return 0;
     }
 
+    /**
+     * @since 0.2.0
+     */
     public function getFillColor(): string
     {
         return '#04CCFF';
