@@ -59,19 +59,6 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
         return $svg;
     }
 
-    protected function meshToSVGNode(string $class): SVGNode
-    {
-        $svg = new $class();
-
-        foreach ($this->obstacle->getFaces() as $meshFace)
-        {
-            $mesh = new SVGPolygon($meshFace->getVertices());
-            $svg->addChild($mesh);
-        }
-
-        return $svg;
-    }
-
     /**
      * @param null|MeshObstacle $obstacle
      */
@@ -89,5 +76,18 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
     {
         SVGStylableUtilities::applyFill($node, self::$STYLE->getFillColor());
         SVGStylableUtilities::applyStroke($node, self::$STYLE->getBorderColor(), self::$STYLE->getBorderWidth());
+    }
+
+    protected function meshToSVGNode(string $class): SVGNode
+    {
+        $svg = new $class();
+
+        foreach ($this->obstacle->getFaces() as $meshFace)
+        {
+            $mesh = new SVGPolygon($meshFace->getVertices());
+            $svg->addChild($mesh);
+        }
+
+        return $svg;
     }
 }
