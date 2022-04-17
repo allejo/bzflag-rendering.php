@@ -45,6 +45,7 @@
     },
     "scripts": {
         "post-install-cmd": "[ -d tools/ ] && composer install --working-dir=tools/php-cs-fixer || exit 0",
+        "coverage": "phpunit --coverage-clover coverage.clover",
         "fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v",
         "stan": "phpstan analyse -c phpstan.neon.dist",
         "test": "phpunit"
