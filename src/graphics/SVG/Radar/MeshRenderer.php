@@ -84,6 +84,12 @@ class MeshRenderer extends ObstacleRenderer implements ISVGStylable
 
         foreach ($this->obstacle->getFaces() as $meshFace)
         {
+            // Don't draw the face if it's intended to be hidden from the radar
+            if ($meshFace->getMaterial()->isNoRadar())
+            {
+                continue;
+            }
+
             $mesh = new SVGPolygon($meshFace->getVertices());
             $svg->addChild($mesh);
         }
