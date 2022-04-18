@@ -45,8 +45,8 @@
     },
     "scripts": {
         "post-install-cmd": "[ -d tools/ ] && composer install --working-dir=tools/php-cs-fixer || exit 0",
-        "fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v",
-        "stan": "phpstan analyse -c phpstan.neon.dist",
+        "fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix $(if [ ! -z $CI ]; then echo \"--format=checkstyle\"; fi)",
+        "stan": "phpstan analyse -c phpstan.neon.dist $(if [ ! -z $CI ]; then echo \"--error-format=checkstyle\"; fi)",
         "test": "phpunit"
     }
 }
