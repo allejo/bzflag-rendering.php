@@ -118,9 +118,8 @@ jobs:
       - name: Run test suite
         run: composer test
 
-      - name: Push to Scrutinizer
+      - name: Push to Codecov
         if: matrix.php-versions == '7.4' && runner.os == 'Linux' && matrix.dependencies == 'install'
-        run: |
-          composer coverage
-          wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+        uses: codecov/codecov-action@v2
+        with:
+            files: ./coverage.xml

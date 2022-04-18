@@ -20,4 +20,8 @@
             <directory suffix=".php">tests</directory>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-clover" target="coverage.xml"/>
+    </logging>
 </phpunit>
